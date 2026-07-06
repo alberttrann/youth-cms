@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stat_items",
+  "info": {
+    "singularName": "stat-item",
+    "pluralName": "stat-items",
+    "displayName": "Stat-Item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "integer"
+    },
+    "prefix": {
+      "type": "string"
+    },
+    "suffix": {
+      "type": "string"
+    }
+  }
+}

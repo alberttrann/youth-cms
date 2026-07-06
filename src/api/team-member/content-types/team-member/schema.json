@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_members",
+  "info": {
+    "singularName": "team-member",
+    "pluralName": "team-members",
+    "displayName": "Team-Member"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "continent": {
+      "type": "enumeration",
+      "enum": [
+        "Asia",
+        "Africa",
+        "America",
+        "Australia",
+        "Europe"
+      ]
+    },
+    "regionGroup": {
+      "type": "enumeration",
+      "enum": [
+        "East Asia",
+        "Southeast Asia",
+        "South Asia",
+        "Central Asia",
+        "West Asia",
+        "North Asia",
+        "Africa",
+        "America",
+        "Australia",
+        "Europe"
+      ]
+    },
+    "bio": {
+      "type": "json"
+    },
+    "sdgTags": {
+      "type": "json"
+    },
+    "year": {
+      "type": "string"
+    },
+    "activityImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "socialLinks": {
+      "type": "component",
+      "component": "shared.social-link",
+      "repeatable": true
+    }
+  }
+}

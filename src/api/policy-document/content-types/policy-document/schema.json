@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "policy_documents",
+  "info": {
+    "singularName": "policy-document",
+    "pluralName": "policy-documents",
+    "displayName": "PolicyDocument"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "governance",
+        "membership",
+        "annual-reports"
+      ]
+    },
+    "fileType": {
+      "type": "enumeration",
+      "enum": [
+        "pdf",
+        "xls",
+        "doc",
+        "ppt"
+      ]
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "fileSize": {
+      "type": "string"
+    }
+  }
+}
