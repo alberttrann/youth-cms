@@ -498,6 +498,72 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
+  collectionName: 'inquiries';
+  info: {
+    displayName: 'Inquiry';
+    pluralName: 'inquiries';
+    singularName: 'inquiry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::inquiry.inquiry'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    reason: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLeadershipApplicationLeadershipApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'leadership_applications';
+  info: {
+    displayName: 'Leadership-Application';
+    pluralName: 'leadership-applications';
+    singularName: 'leadership-application';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    fullName: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::leadership-application.leadership-application'
+    > &
+      Schema.Attribute.Private;
+    organizationName: Schema.Attribute.String;
+    organizationPhone: Schema.Attribute.String;
+    phoneNumber: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
@@ -521,7 +587,7 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     donationQr: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    focusSdgs: Schema.Attribute.JSON;
+    focusSdgs: Schema.Attribute.Text;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -578,6 +644,40 @@ export interface ApiNewsItemNewsItem extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiOrganizationRegistrationOrganizationRegistration
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'organization_registrations';
+  info: {
+    displayName: 'Organization-Registration';
+    pluralName: 'organization-registrations';
+    singularName: 'organization-registration';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    fullName: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::organization-registration.organization-registration'
+    > &
+      Schema.Attribute.Private;
+    organizationName: Schema.Attribute.String;
+    organizationPhone: Schema.Attribute.String;
+    phoneNumber: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPolicyDocumentPolicyDocument
   extends Struct.CollectionTypeSchema {
   collectionName: 'policy_documents';
@@ -624,12 +724,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    countriesCovered: Schema.Attribute.JSON;
+    countriesCovered: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    focusSdgs: Schema.Attribute.JSON;
+    focusSdgs: Schema.Attribute.Text;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -705,7 +805,7 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
       true
     >;
     avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    bio: Schema.Attribute.JSON;
+    bio: Schema.Attribute.Text;
     continent: Schema.Attribute.Enumeration<
       ['Asia', 'Africa', 'America', 'Australia', 'Europe']
     >;
@@ -735,7 +835,7 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
       ]
     >;
     role: Schema.Attribute.String;
-    sdgTags: Schema.Attribute.JSON;
+    sdgTags: Schema.Attribute.Text;
     socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1257,8 +1357,11 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::faq.faq': ApiFaqFaq;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
+      'api::inquiry.inquiry': ApiInquiryInquiry;
+      'api::leadership-application.leadership-application': ApiLeadershipApplicationLeadershipApplication;
       'api::member.member': ApiMemberMember;
       'api::news-item.news-item': ApiNewsItemNewsItem;
+      'api::organization-registration.organization-registration': ApiOrganizationRegistrationOrganizationRegistration;
       'api::policy-document.policy-document': ApiPolicyDocumentPolicyDocument;
       'api::project.project': ApiProjectProject;
       'api::stat-item.stat-item': ApiStatItemStatItem;

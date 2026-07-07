@@ -54,7 +54,7 @@
       ]
     },
     "focusSdgs": {
-      "type": "json"
+      "type": "text"
     },
     "donationQr": {
       "type": "media",

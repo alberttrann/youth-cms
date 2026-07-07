@@ -24,10 +24,10 @@
       "type": "string"
     },
     "countriesCovered": {
-      "type": "json"
+      "type": "text"
     },
     "focusSdgs": {
-      "type": "json"
+      "type": "text"
     },
     "projectStatus": {
       "type": "enumeration",

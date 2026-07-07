@@ -53,10 +53,10 @@
       ]
     },
     "bio": {
-      "type": "json"
+      "type": "text"
     },
     "sdgTags": {
-      "type": "json"
+      "type": "text"
     },
     "year": {
       "type": "string"

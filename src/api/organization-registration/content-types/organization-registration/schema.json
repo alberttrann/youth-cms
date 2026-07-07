@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_registrations",
+  "info": {
+    "singularName": "organization-registration",
+    "pluralName": "organization-registrations",
+    "displayName": "Organization-Registration"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organizationName": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "organizationPhone": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phoneNumber": {
+      "type": "string"
+    }
+  }
+}
