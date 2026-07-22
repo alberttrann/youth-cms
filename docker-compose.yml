@@ -1,0 +1,19 @@
+services:
+  strapi:
+    build: .
+    image: youth-cms:local
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+    ports:
+      - "${PORT:-1337}:1337"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:1337/_health', r => process.exit(r.statusCode === 204 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

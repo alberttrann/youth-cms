@@ -1,0 +1,16 @@
+.git
+.github
+.claude
+node_modules
+dist
+build
+.cache
+.tmp
+coverage
+public/uploads
+*.log
+.env*
+docs
+README.md
+Dockerfile*
+.dockerignore
