@@ -4,96 +4,172 @@
   "info": {
     "singularName": "team-member",
     "pluralName": "team-members",
-    "displayName": "Team-Member"
+    "displayName": "Team Member",
+    "description": "Leadership team members (Executives & Continental Directors)"
   },
-  "options": { "draftAndPublish": true },
+  "options": {
+    "draftAndPublish": true
+  },
   "pluginOptions": {},
   "config": {
     "layouts": {
-      "list": ["name", "leadershipType", "continent", "displayOrder"],
+      "list": ["name", "role", "leadershipType", "continent", "displayOrder"],
       "edit": [
-        [{ "name": "name", "size": 8 }, { "name": "leadershipType", "size": 4 }],
-        [{ "name": "role", "size": 6 }, { "name": "displayOrder", "size": 3 }, { "name": "year", "size": 3 }],
-        [{ "name": "continent", "size": 6 }, { "name": "regionGroup", "size": 6 }],
-        [{ "name": "focusSdgs", "size": 12 }],
-        [{ "name": "avatar", "size": 6 }, { "name": "activityImages", "size": 6 }],
+        [
+          { "name": "name", "size": 6 },
+          { "name": "role", "size": 6 }
+        ],
+        [
+          { "name": "leadershipType", "size": 4 },
+          { "name": "displayOrder", "size": 4 },
+          { "name": "year", "size": 4 }
+        ],
+        [
+          { "name": "continent", "size": 4 },
+          { "name": "regionGroup", "size": 8 }
+        ],
         [{ "name": "bio", "size": 12 }],
+        [{ "name": "focusSdgs", "size": 12 }],
+        [
+          { "name": "avatar", "size": 6 },
+          { "name": "activityImages", "size": 6 }
+        ],
         [{ "name": "socialLinks", "size": 12 }]
       ]
     },
     "metadatas": {
       "name": {
-        "edit": { "label": "Họ và tên", "placeholder": "VD: Nguyen Minh Anh", "description": "Tên lãnh đạo hiển thị trên thẻ và modal." },
-        "list": { "label": "Họ và tên" }
-      },
-      "leadershipType": {
-        "edit": { "label": "Nhóm lãnh đạo", "description": "Chọn Executive Leadership hoặc Continental Director." },
-        "list": { "label": "Nhóm" }
+        "edit": {
+          "label": "Name",
+          "placeholder": "Full name"
+        },
+        "list": { "label": "Name" }
       },
       "role": {
-        "edit": { "label": "Chức vụ", "placeholder": "VD: President & Chair" },
-        "list": { "label": "Chức vụ" }
+        "edit": {
+          "label": "Role/Title",
+          "placeholder": "e.g., President & Chair, Continental Director"
+        },
+        "list": { "label": "Role" }
+      },
+      "leadershipType": {
+        "edit": {
+          "label": "Leadership Type",
+          "description": "Distinguish between executive and continental director"
+        },
+        "list": { "label": "Type" }
       },
       "displayOrder": {
-        "edit": { "label": "Thứ tự hiển thị", "description": "Số nhỏ hơn hiển thị trước. Executive: President → Vice President → Secretary General." },
-        "list": { "label": "Thứ tự" }
-      },
-      "continent": {
-        "edit": { "label": "Châu lục", "description": "FE dùng để lọc Continental Directors." },
-        "list": { "label": "Châu lục" }
-      },
-      "regionGroup": {
-        "edit": { "label": "Khu vực", "description": "Bắt buộc với Director thuộc Asia; để trống với Executive." },
-        "list": { "label": "Khu vực" }
-      },
-      "focusSdgs": {
-        "edit": { "label": "Mục tiêu SDG trọng tâm", "description": "Tick các mục tiêu 1-17 theo UN SDG. Hệ thống tự loại trùng và chặn giá trị ngoài 1-17." },
-        "list": { "label": "SDG" }
-      },
-      "avatar": {
-        "edit": { "label": "Ảnh đại diện", "description": "Ảnh chân dung; FE hiển thị dạng hình tròn." },
-        "list": { "label": "Ảnh" }
-      },
-      "activityImages": {
-        "edit": { "label": "Ảnh hoạt động", "description": "Chọn nhiều ảnh hoạt động của lãnh đạo." },
-        "list": { "label": "Ảnh hoạt động" }
-      },
-      "bio": {
-        "edit": { "label": "Tiểu sử", "description": "Mỗi đoạn cách nhau bằng một dòng trống; FE hiển thị mỗi đoạn thành một paragraph." },
-        "list": { "label": "Tiểu sử" }
+        "edit": {
+          "label": "Display Order",
+          "description": "Sort order in leadership list (ascending)"
+        },
+        "list": { "label": "Order" }
       },
       "year": {
-        "edit": { "label": "Thời gian hoạt động", "placeholder": "VD: 2020 - 2026" },
-        "list": { "label": "Thời gian" }
+        "edit": {
+          "label": "Term Year",
+          "placeholder": "e.g., 2026 - 2027"
+        },
+        "list": { "label": "Term" }
+      },
+      "continent": {
+        "edit": {
+          "label": "Continent",
+          "description": "Primary continent of leadership"
+        },
+        "list": { "label": "Continent" }
+      },
+      "regionGroup": {
+        "edit": {
+          "label": "Region Group",
+          "description": "More specific region within continent"
+        },
+        "list": { "label": "Region" }
+      },
+      "bio": {
+        "edit": {
+          "label": "Biography",
+          "placeholder": "Personal statement / introduction (supports multiple paragraphs)"
+        },
+        "list": { "label": "Bio" }
+      },
+      "focusSdgs": {
+        "edit": {
+          "label": "Focus SDGs",
+          "description": "Select relevant UN Sustainable Development Goals"
+        },
+        "list": { "label": "SDGs" }
+      },
+      "avatar": {
+        "edit": {
+          "label": "Profile Image",
+          "description": "Square profile photo"
+        },
+        "list": { "label": "Avatar" }
+      },
+      "activityImages": {
+        "edit": {
+          "label": "Activity Images",
+          "description": "Photos from leadership activities"
+        },
+        "list": { "label": "Activity Photos" }
       },
       "socialLinks": {
-        "edit": { "label": "Liên kết mạng xã hội", "description": "Mỗi dòng gồm nền tảng + URL đầy đủ (https://...)." },
-        "list": { "label": "Mạng xã hội" }
+        "edit": {
+          "label": "Social Links",
+          "description": "LinkedIn, Instagram, Facebook, etc."
+        },
+        "list": { "label": "Social" }
       }
     }
   },
   "attributes": {
-    "name": { "type": "string" },
-    "role": { "type": "string" },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
     "leadershipType": {
       "type": "enumeration",
-      "enum": ["executive", "continental-director"]
+      "enum": ["executive", "continental-director"],
+      "required": true
     },
-    "displayOrder": { "type": "integer", "default": 0, "min": 0 },
-    "avatar": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+    "displayOrder": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "year": {
+      "type": "string"
     },
     "continent": {
       "type": "enumeration",
-      "enum": ["Asia", "Africa", "America", "Australia", "Europe"]
+      "enum": ["Asia", "Africa", "America", "Australia", "Europe"],
+      "required": true
     },
     "regionGroup": {
       "type": "enumeration",
-      "enum": ["East Asia", "Southeast Asia", "South Asia", "Central Asia", "West Asia", "North Asia", "Africa", "America", "Australia", "Europe"]
+      "enum": [
+        "East Asia",
+        "Southeast Asia",
+        "South Asia",
+        "Central Asia",
+        "West Asia",
+        "North Asia",
+        "Africa",
+        "America",
+        "Australia",
+        "Europe"
+      ]
     },
-    "bio": { "type": "text" },
+    "bio": {
+      "type": "text",
+      "description": "Multi-paragraph biography (separated by double line breaks)"
+    },
     "focusSdgs": {
       "type": "customField",
       "customField": "global::multi-enum",
@@ -101,11 +177,15 @@
         "choices": "1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships"
       }
     },
-    "year": { "type": "string" },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
     "activityImages": {
       "type": "media",
       "multiple": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": ["images"]
     },
     "socialLinks": {
       "type": "component",

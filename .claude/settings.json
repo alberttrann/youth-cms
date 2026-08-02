@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_neon_neon__list_projects",
+      "mcp__plugin_neon_neon__describe_project",
+      "mcp__plugin_neon_neon__get_database_tables",
+      "mcp__plugin_neon_neon__describe_branch",
+      "mcp__plugin_neon_neon__run_sql",
+      "mcp__plugin_neon_neon__create_branch",
+      "mcp__plugin_neon_neon__get_connection_string",
+      "mcp__plugin_neon_neon__list_branch_computes"
+    ]
+  }
+}

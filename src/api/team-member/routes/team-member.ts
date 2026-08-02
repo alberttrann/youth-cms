@@ -1,7 +1,49 @@
-/**
- * team-member router
- */
-
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::team-member.team-member');
+export default {
+  routes: [
+    {
+      method: 'GET',
+      path: '/team-members',
+      handler: 'team-member.find',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/team-members/:documentId',
+      handler: 'team-member.findOne',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'POST',
+      path: '/team-members',
+      handler: 'team-member.create',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'PUT',
+      path: '/team-members/:documentId',
+      handler: 'team-member.update',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'DELETE',
+      path: '/team-members/:documentId',
+      handler: 'team-member.delete',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+  ],
+};

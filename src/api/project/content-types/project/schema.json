@@ -10,6 +10,137 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
+  "config": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 20,
+      "mainField": "name",
+      "defaultSortBy": "year",
+      "defaultSortOrder": "DESC"
+    },
+    "layouts": {
+      "list": [
+        "name",
+        "region",
+        "projectStatus",
+        "year"
+      ],
+      "edit": [
+        [
+          { "name": "name", "size": 6 },
+          { "name": "projectStatus", "size": 6 }
+        ],
+        [
+          { "name": "description", "size": 12 }
+        ],
+        [
+          { "name": "impactIndication", "size": 8 },
+          { "name": "year", "size": 4 }
+        ],
+        [
+          { "name": "region", "size": 6 },
+          { "name": "member", "size": 6 }
+        ],
+        [
+          { "name": "countriesCovered", "size": 12 }
+        ],
+        [
+          { "name": "focusSdgs", "size": 12 }
+        ],
+        [
+          { "name": "outstandingImage", "size": 6 },
+          { "name": "gallery", "size": 6 }
+        ]
+      ]
+    },
+    "metadatas": {
+      "name": {
+        "edit": {
+          "label": "Tên dự án",
+          "placeholder": "VD: Education for All Initiative",
+          "description": "Tên hiển thị trên thẻ dự án ở trang /projects."
+        },
+        "list": { "label": "Tên dự án", "searchable": true, "sortable": true }
+      },
+      "projectStatus": {
+        "edit": {
+          "label": "Trạng thái",
+          "description": "ongoing = đang chạy, completed = đã hoàn thành, planned = đang lên kế hoạch."
+        },
+        "list": { "label": "Trạng thái", "sortable": true }
+      },
+      "description": {
+        "edit": {
+          "label": "Mô tả dự án",
+          "placeholder": "Mục tiêu, cách triển khai, đối tượng hưởng lợi...",
+          "description": "Đoạn giới thiệu hiển thị ở trang chi tiết dự án."
+        },
+        "list": { "label": "Mô tả" }
+      },
+      "impactIndication": {
+        "edit": {
+          "label": "Chỉ số tác động",
+          "placeholder": "VD: Reached 2,000+ students",
+          "description": "Một câu ngắn nêu kết quả đo được của dự án."
+        },
+        "list": { "label": "Chỉ số tác động" }
+      },
+      "year": {
+        "edit": {
+          "label": "Năm",
+          "placeholder": "2022",
+          "description": "Năm triển khai. Danh sách dự án được sắp xếp giảm dần theo năm."
+        },
+        "list": { "label": "Năm", "sortable": true }
+      },
+      "region": {
+        "edit": {
+          "label": "Khu vực",
+          "description": "Chọn một khu vực trong danh sách. Giá trị này được hiển thị nguyên văn ở trang chi tiết dự án."
+        },
+        "list": { "label": "Khu vực", "sortable": true }
+      },
+      "member": {
+        "edit": {
+          "label": "Thành viên phụ trách",
+          "description": "Tổ chức thành viên dẫn dắt dự án. Trang /projects dùng tên này cho mục \"Led by\".",
+          "mainField": "name"
+        },
+        "list": { "label": "Thành viên" }
+      },
+      "countriesCovered": {
+        "edit": {
+          "label": "Quốc gia tham gia",
+          "placeholder": "[\"Vietnam\",\"Cambodia\"]",
+          "description": "Nhập dạng mảng JSON hoặc danh sách phân tách bằng dấu phẩy."
+        },
+        "list": { "label": "Quốc gia" }
+      },
+      "focusSdgs": {
+        "edit": {
+          "label": "Mục tiêu SDG",
+          "description": "Tích chọn các mục tiêu phát triển bền vững (1-17) mà dự án hướng tới."
+        },
+        "list": { "label": "SDG" }
+      },
+      "outstandingImage": {
+        "edit": {
+          "label": "Ảnh đại diện",
+          "description": "Ảnh chính của dự án, dùng cho thẻ ở trang /projects."
+        },
+        "list": { "label": "Ảnh đại diện" }
+      },
+      "gallery": {
+        "edit": {
+          "label": "Thư viện ảnh",
+          "description": "Ảnh bổ sung cho trang chi tiết dự án."
+        },
+        "list": { "label": "Thư viện ảnh" }
+      }
+    }
+  },
   "attributes": {
     "name": {
       "type": "string"
@@ -21,13 +152,36 @@
       "type": "string"
     },
     "region": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "Southeast Asia",
+        "South Asia",
+        "East Asia",
+        "Central Asia",
+        "Middle East",
+        "North Africa",
+        "West Africa",
+        "East Africa",
+        "Southern Africa",
+        "Western Europe",
+        "Eastern Europe",
+        "Europe & Middle East",
+        "North America",
+        "Latin America",
+        "Caribbean",
+        "Pacific",
+        "Global"
+      ]
     },
     "countriesCovered": {
       "type": "text"
     },
     "focusSdgs": {
-      "type": "text"
+      "type": "customField",
+      "customField": "global::multi-enum",
+      "options": {
+        "choices": "1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships"
+      }
     },
     "projectStatus": {
       "type": "enumeration",

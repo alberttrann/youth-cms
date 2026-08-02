@@ -10,6 +10,136 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
+  "config": {
+    "layouts": {
+      "list": ["name", "country", "continent", "leader"],
+      "edit": [
+        [{ "name": "name", "size": 12 }],
+        [{ "name": "shortDescription", "size": 12 }],
+        [{ "name": "description", "size": 12 }],
+        [
+          { "name": "country", "size": 4 },
+          { "name": "continent", "size": 4 },
+          { "name": "leader", "size": 4 }
+        ],
+        [{ "name": "period", "size": 6 }],
+        [{ "name": "focusSdgs", "size": 12 }],
+        [
+          { "name": "logo", "size": 4 },
+          { "name": "cover", "size": 4 },
+          { "name": "donationQr", "size": 4 }
+        ],
+        [{ "name": "gallery", "size": 12 }],
+        [{ "name": "socialLinks", "size": 12 }],
+        [{ "name": "projects", "size": 12 }]
+      ]
+    },
+    "metadatas": {
+      "name": {
+        "edit": {
+          "label": "Tên tổ chức",
+          "placeholder": "VD: Youth for Education Foundation",
+          "description": "Tên đầy đủ, hiển thị trên thẻ thành viên ở trang /members."
+        },
+        "list": { "label": "Tên tổ chức" }
+      },
+      "shortDescription": {
+        "edit": {
+          "label": "Mô tả ngắn",
+          "placeholder": "Một câu giới thiệu, khoảng 140 ký tự",
+          "description": "Dòng teaser trên thẻ ở danh sách /members."
+        },
+        "list": { "label": "Mô tả ngắn" }
+      },
+      "description": {
+        "edit": {
+          "label": "Mô tả chi tiết",
+          "placeholder": "Giới thiệu đầy đủ về tổ chức, chương trình, phạm vi hoạt động...",
+          "description": "Nội dung chính của trang chi tiết /members/:documentId."
+        },
+        "list": { "label": "Mô tả chi tiết" }
+      },
+      "country": {
+        "edit": {
+          "label": "Quốc gia",
+          "placeholder": "VD: Vietnam",
+          "description": "FE dùng giá trị này cho bộ lọc theo quốc gia."
+        },
+        "list": { "label": "Quốc gia" }
+      },
+      "continent": {
+        "edit": {
+          "label": "Châu lục",
+          "description": "FE dùng giá trị này cho bộ lọc theo châu lục."
+        },
+        "list": { "label": "Châu lục" }
+      },
+      "leader": {
+        "edit": {
+          "label": "Người đại diện",
+          "placeholder": "VD: Dr. Hue Tran"
+        },
+        "list": { "label": "Người đại diện" }
+      },
+      "period": {
+        "edit": {
+          "label": "Thời gian hoạt động",
+          "placeholder": "VD: 2019 → nay"
+        },
+        "list": { "label": "Thời gian" }
+      },
+      "focusSdgs": {
+        "edit": {
+          "label": "Mục tiêu SDG trọng tâm",
+          "description": "Tick các mục tiêu 1-17 theo UN SDG. Hệ thống tự loại trùng và chặn giá trị ngoài 1-17."
+        },
+        "list": { "label": "SDG" }
+      },
+      "logo": {
+        "edit": {
+          "label": "Logo",
+          "description": "Ảnh vuông, nền trong suốt (PNG/SVG) cho kết quả đẹp nhất."
+        },
+        "list": { "label": "Logo" }
+      },
+      "cover": {
+        "edit": {
+          "label": "Ảnh bìa",
+          "description": "Ảnh ngang tỉ lệ ~16:9, hiển thị đầu trang chi tiết."
+        },
+        "list": { "label": "Ảnh bìa" }
+      },
+      "donationQr": {
+        "edit": {
+          "label": "Mã QR quyên góp",
+          "description": "Ảnh QR, hiển thị ở khối kêu gọi quyên góp."
+        },
+        "list": { "label": "QR quyên góp" }
+      },
+      "gallery": {
+        "edit": {
+          "label": "Thư viện ảnh",
+          "description": "Chọn nhiều ảnh; FE hiển thị dạng lưới ở trang chi tiết."
+        },
+        "list": { "label": "Thư viện ảnh" }
+      },
+      "socialLinks": {
+        "edit": {
+          "label": "Liên kết mạng xã hội",
+          "description": "Mỗi dòng gồm nền tảng + URL đầy đủ (https://...)."
+        },
+        "list": { "label": "Mạng xã hội" }
+      },
+      "projects": {
+        "edit": {
+          "label": "Dự án của thành viên",
+          "description": "Chọn dự án đã có; hoặc để trống và gán từ phía Project.",
+          "mainField": "name"
+        },
+        "list": { "label": "Dự án" }
+      }
+    }
+  },
   "attributes": {
     "name": {
       "type": "string"
@@ -54,7 +184,11 @@
       ]
     },
     "focusSdgs": {
-      "type": "text"
+      "type": "customField",
+      "customField": "global::multi-enum",
+      "options": {
+        "choices": "1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships"
+      }
     },
     "donationQr": {
       "type": "media",

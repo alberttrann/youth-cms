@@ -587,7 +587,13 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     donationQr: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    focusSdgs: Schema.Attribute.Text;
+    focusSdgs: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'global::multi-enum',
+        {
+          choices: '1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships';
+        }
+      >;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -729,7 +735,13 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    focusSdgs: Schema.Attribute.Text;
+    focusSdgs: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'global::multi-enum',
+        {
+          choices: '1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships';
+        }
+      >;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -750,7 +762,27 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       ['ongoing', 'completed', 'planned']
     >;
     publishedAt: Schema.Attribute.DateTime;
-    region: Schema.Attribute.String;
+    region: Schema.Attribute.Enumeration<
+      [
+        'Southeast Asia',
+        'South Asia',
+        'East Asia',
+        'Central Asia',
+        'Middle East',
+        'North Africa',
+        'West Africa',
+        'East Africa',
+        'Southern Africa',
+        'Western Europe',
+        'Eastern Europe',
+        'Europe & Middle East',
+        'North America',
+        'Latin America',
+        'Caribbean',
+        'Pacific',
+        'Global',
+      ]
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -812,6 +844,24 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    displayOrder: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<0>;
+    focusSdgs: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'global::multi-enum',
+        {
+          choices: '1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships';
+        }
+      >;
+    leadershipType: Schema.Attribute.Enumeration<
+      ['executive', 'continental-director']
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -835,7 +885,6 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
       ]
     >;
     role: Schema.Attribute.String;
-    sdgTags: Schema.Attribute.Text;
     socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
