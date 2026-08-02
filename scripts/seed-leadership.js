@@ -6,7 +6,7 @@ const leadershipData = {
   executives: [
     {
       name: 'Theodora Abena Yeboah',
-      role: 'Vice President - Chair (PHÓ CHỦ TỊCH)',
+      role: 'Vice President - Chair',
       leadershipType: 'executive',
       displayOrder: 1,
       continent: 'Africa',
@@ -19,7 +19,7 @@ const leadershipData = {
     },
     {
       name: 'Safin Hussein Mohammed',
-      role: 'President - Chair (CHỦ TỊCH)',
+      role: 'President - Chair',
       leadershipType: 'executive',
       displayOrder: 2,
       continent: 'Africa',
@@ -34,7 +34,7 @@ const leadershipData = {
     },
     {
       name: 'Thuy Linh Nguyen T. (Emily)',
-      role: 'Vice President - Chair (PHÓ CHỦ TỊCH)',
+      role: 'Vice President - Chair',
       leadershipType: 'executive',
       displayOrder: 3,
       continent: 'Asia',
@@ -49,7 +49,7 @@ const leadershipData = {
   directors: [
     {
       name: 'Trần Nguyễn Mai Trinh',
-      role: 'Quản Lý Khu Vực (TP.HCM), Ban Điều Hành Địa Phương',
+      role: 'Regional Director - Ho Chi Minh City',
       leadershipType: 'continental-director',
       displayOrder: 4,
       continent: 'Asia',
@@ -63,7 +63,7 @@ const leadershipData = {
     },
     {
       name: 'Lê Mạnh Linh (Henry)',
-      role: 'Quản Lý Khu Vực (Hà Nội), Ban Điều Hành Địa Phương',
+      role: 'Regional Director - Hanoi',
       leadershipType: 'continental-director',
       displayOrder: 5,
       continent: 'Asia',
@@ -74,7 +74,7 @@ const leadershipData = {
     },
     {
       name: 'Nguyễn Thanh Hải (Hai)',
-      role: 'Quản Lý Khu Vực (TP.HCM), Ban Điều Hành Địa Phương',
+      role: 'Regional Director - Ho Chi Minh City',
       leadershipType: 'continental-director',
       displayOrder: 6,
       continent: 'Asia',
@@ -85,7 +85,7 @@ const leadershipData = {
     },
     {
       name: 'Trần Thị Mỹ Phúc (ER)',
-      role: 'Quản Lý Khu Vực (TP.HCM), Ban Điều Hành Địa Phương',
+      role: 'Regional Director - Ho Chi Minh City',
       leadershipType: 'continental-director',
       displayOrder: 7,
       continent: 'Asia',
@@ -99,7 +99,7 @@ const leadershipData = {
     },
     {
       name: 'Vũ Huyền (Huyen)',
-      role: 'Quản Lý Khu Vực (Hà Nội), Ban Điều Hành Địa Phương',
+      role: 'Regional Director - Hanoi',
       leadershipType: 'continental-director',
       displayOrder: 8,
       continent: 'Asia',
@@ -110,7 +110,7 @@ const leadershipData = {
     },
     {
       name: 'Nguyễn Thái (Vladimir Thai / Alpha)',
-      role: 'Quản Lý Khu Vực (Hà Nội), Ban Điều Hành Địa Phương',
+      role: 'Regional Director - Hanoi',
       leadershipType: 'continental-director',
       displayOrder: 9,
       continent: 'Asia',
