@@ -15,7 +15,70 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  validate:
+    name: Build and smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Strapi
+        env:
+          NODE_ENV: production
+          APP_KEYS: test-key-1,test-key-2,test-key-3,test-key-4
+          API_TOKEN_SALT: test-api-token-salt
+          ADMIN_JWT_SECRET: test-admin-jwt-secret
+          TRANSFER_TOKEN_SALT: test-transfer-token-salt
+          ENCRYPTION_KEY: test-encryption-key
+        run: npm run build
+
+      - name: Smoke test production server
+        env:
+          NODE_ENV: production
+          HOST: 127.0.0.1
+          PORT: 1337
+          APP_KEYS: test-key-1,test-key-2,test-key-3,test-key-4
+          API_TOKEN_SALT: test-api-token-salt
+          ADMIN_JWT_SECRET: test-admin-jwt-secret
+          TRANSFER_TOKEN_SALT: test-transfer-token-salt
+          ENCRYPTION_KEY: test-encryption-key
+          DATABASE_CLIENT: sqlite
+          DATABASE_FILENAME: .tmp/ci.db
+        run: |
+          set -e
+          npm run start > /tmp/strapi.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          for attempt in $(seq 1 30); do
+            health_status=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:1337/_health || true)
+            if [ "$health_status" = "204" ]; then
+              break
+            fi
+            if [ "$attempt" = "30" ]; then
+              cat /tmp/strapi.log
+              exit 1
+            fi
+            sleep 2
+          done
+
+          admin_status=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:1337/admin)
+          test "$admin_status" = "200"
+
   build:
+    name: Build and publish image
+    needs: validate
     runs-on: ubuntu-latest
     permissions:
       contents: read
