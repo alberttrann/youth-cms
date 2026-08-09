@@ -66,6 +66,7 @@ jobs:
           APP_KEYS: test-key-1,test-key-2,test-key-3,test-key-4
           API_TOKEN_SALT: test-api-token-salt
           ADMIN_JWT_SECRET: test-admin-jwt-secret
+          JWT_SECRET: test-jwt-secret
           TRANSFER_TOKEN_SALT: test-transfer-token-salt
           ENCRYPTION_KEY: test-encryption-key
           DATABASE_CLIENT: postgres
