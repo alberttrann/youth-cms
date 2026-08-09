@@ -467,37 +467,6 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
-  collectionName: 'global_settings';
-  info: {
-    displayName: 'Global-Setting';
-    pluralName: 'global-settings';
-    singularName: 'global-setting';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    address: Schema.Attribute.Text;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::global-setting.global-setting'
-    > &
-      Schema.Attribute.Private;
-    phone: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
   collectionName: 'inquiries';
   info: {
@@ -524,40 +493,6 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     reason: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiLeadershipApplicationLeadershipApplication
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'leadership_applications';
-  info: {
-    displayName: 'Leadership-Application';
-    pluralName: 'leadership-applications';
-    singularName: 'leadership-application';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    address: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    fullName: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::leadership-application.leadership-application'
-    > &
-      Schema.Attribute.Private;
-    organizationName: Schema.Attribute.String;
-    organizationPhone: Schema.Attribute.String;
-    phoneNumber: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -612,72 +547,6 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     shortDescription: Schema.Attribute.String;
     socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiNewsItemNewsItem extends Struct.CollectionTypeSchema {
-  collectionName: 'news_items';
-  info: {
-    displayName: 'News-Item';
-    pluralName: 'news-items';
-    singularName: 'news-item';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    category: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    date: Schema.Attribute.Date;
-    excerpt: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::news-item.news-item'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiOrganizationRegistrationOrganizationRegistration
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'organization_registrations';
-  info: {
-    displayName: 'Organization-Registration';
-    pluralName: 'organization-registrations';
-    singularName: 'organization-registration';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    address: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
-    fullName: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::organization-registration.organization-registration'
-    > &
-      Schema.Attribute.Private;
-    organizationName: Schema.Attribute.String;
-    organizationPhone: Schema.Attribute.String;
-    phoneNumber: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -790,41 +659,11 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiStatItemStatItem extends Struct.CollectionTypeSchema {
-  collectionName: 'stat_items';
-  info: {
-    displayName: 'Stat-Item';
-    pluralName: 'stat-items';
-    singularName: 'stat-item';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    label: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::stat-item.stat-item'
-    > &
-      Schema.Attribute.Private;
-    prefix: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    suffix: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    value: Schema.Attribute.Integer;
-  };
-}
-
 export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
   collectionName: 'team_members';
   info: {
-    displayName: 'Team-Member';
+    description: 'Leadership team members (Executives & Continental Directors)';
+    displayName: 'Team Member';
     pluralName: 'team-members';
     singularName: 'team-member';
   };
@@ -832,25 +671,18 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    activityImages: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    activityImages: Schema.Attribute.Media<'images', true>;
+    avatar: Schema.Attribute.Media<'images'>;
     bio: Schema.Attribute.Text;
     continent: Schema.Attribute.Enumeration<
       ['Asia', 'Africa', 'America', 'Australia', 'Europe']
-    >;
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     displayOrder: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      > &
+      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<0>;
     focusSdgs: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
@@ -861,14 +693,15 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
       >;
     leadershipType: Schema.Attribute.Enumeration<
       ['executive', 'continental-director']
-    >;
+    > &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::team-member.team-member'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     regionGroup: Schema.Attribute.Enumeration<
       [
@@ -884,7 +717,7 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
         'Europe',
       ]
     >;
-    role: Schema.Attribute.String;
+    role: Schema.Attribute.String & Schema.Attribute.Required;
     socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1405,15 +1238,10 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::faq.faq': ApiFaqFaq;
-      'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
       'api::inquiry.inquiry': ApiInquiryInquiry;
-      'api::leadership-application.leadership-application': ApiLeadershipApplicationLeadershipApplication;
       'api::member.member': ApiMemberMember;
-      'api::news-item.news-item': ApiNewsItemNewsItem;
-      'api::organization-registration.organization-registration': ApiOrganizationRegistrationOrganizationRegistration;
       'api::policy-document.policy-document': ApiPolicyDocumentPolicyDocument;
       'api::project.project': ApiProjectProject;
-      'api::stat-item.stat-item': ApiStatItemStatItem;
       'api::team-member.team-member': ApiTeamMemberTeamMember;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

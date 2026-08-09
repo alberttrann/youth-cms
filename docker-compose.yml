@@ -12,7 +12,6 @@ services:
     ports:
       - "${PORT:-1337}:1337"
     volumes:
-      # Keep this volume for SQLite fallback; production uses the external PostgreSQL URL.
       - strapi-data:/opt/app/.tmp
       # Cloudinary is the production upload provider; this remains a safe local fallback.
       - strapi-uploads:/opt/app/public/uploads

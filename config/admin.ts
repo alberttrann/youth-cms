@@ -1,5 +1,13 @@
 import type { Core } from '@strapi/strapi';
 
+const PREVIEW_PATHS: Record<string, (documentId: string) => string> = {
+  'api::project.project': (documentId) => `/projects/${encodeURIComponent(documentId)}`,
+  'api::member.member': (documentId) => `/members/${encodeURIComponent(documentId)}`,
+  'api::faq.faq': () => '/',
+  'api::team-member.team-member': () => '/leadership',
+  'api::policy-document.policy-document': () => '/policy-documents',
+};
+
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => {
   const clientUrl = env('CLIENT_URL', 'http://localhost:5173').replace(/\/$/, '');
   const previewSecret = env('PREVIEW_SECRET', '');
@@ -29,12 +37,7 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => 
       config: {
         allowedOrigins: [clientUrl],
         async handler(uid, { documentId, status }) {
-          const pathname =
-            uid === 'api::project.project'
-              ? `/projects/${encodeURIComponent(documentId)}`
-              : uid === 'api::member.member'
-                ? `/members/${encodeURIComponent(documentId)}`
-                : null;
+          const pathname = PREVIEW_PATHS[uid]?.(documentId);
 
           if (!pathname) return null;
 
