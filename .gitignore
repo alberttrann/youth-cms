@@ -1,6 +1,5 @@
-############################
-# OS X
-############################
+# Claude Code local settings
+.claude/
 
 .DS_Store
 .AppleDouble
