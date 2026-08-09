@@ -20,6 +20,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: strapi
+          POSTGRES_USER: strapi
+          POSTGRES_PASSWORD: strapi
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U strapi -d strapi"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,8 +68,9 @@ jobs:
           ADMIN_JWT_SECRET: test-admin-jwt-secret
           TRANSFER_TOKEN_SALT: test-transfer-token-salt
           ENCRYPTION_KEY: test-encryption-key
-          DATABASE_CLIENT: sqlite
-          DATABASE_FILENAME: .tmp/ci.db
+          DATABASE_CLIENT: postgres
+          DATABASE_URL: postgresql://strapi:strapi@127.0.0.1:5432/strapi
+          DATABASE_SSL: false
         run: |
           set -e
           npm run start > /tmp/strapi.log 2>&1 &
