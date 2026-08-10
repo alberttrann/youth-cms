@@ -9,7 +9,7 @@ const PREVIEW_PATHS: Record<string, (documentId: string) => string> = {
 };
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => {
-  const clientUrl = env('CLIENT_URL', 'http://localhost:5173').replace(/\/$/, '');
+  const clientUrl = env('CLIENT_URL', 'http://localhost:5173');
   const previewSecret = env('PREVIEW_SECRET', '');
 
   return {
