@@ -187,7 +187,7 @@
       "type": "customField",
       "customField": "global::multi-enum",
       "options": {
-        "choices": "1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships"
+        "choices": "1=SDG 1 – No Poverty,2=SDG 2 – Zero Hunger,3=SDG 3 – Good Health,4=SDG 4 – Quality Education,5=SDG 5 – Gender Equality,6=SDG 6 – Clean Water,7=SDG 7 – Affordable Energy,8=SDG 8 – Decent Work,9=SDG 9 – Industry Innovation,10=SDG 10 – Reduced Inequalities,11=SDG 11 – Sustainable Cities,12=SDG 12 – Responsible Consumption,13=SDG 13 – Climate Action,14=SDG 14 – Life Below Water,15=SDG 15 – Life On Land,16=SDG 16 – Peace Justice,17=SDG 17 – Partnerships"
       }
     },
     "donationQr": {
