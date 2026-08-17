@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_sections_faq_sections",
+  "info": {
+    "displayName": "FAQ Section",
+    "icon": "bulletList",
+    "description": "Accordion FAQ section with global or custom questions"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Frequently Asked Questions",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "useGlobalFaqs": {
+      "type": "boolean",
+      "default": false
+    },
+    "customFaqs": {
+      "type": "component",
+      "component": "shared.faq-item",
+      "repeatable": true
+    },
+    "showViewAllButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}
