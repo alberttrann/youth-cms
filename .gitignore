@@ -130,3 +130,8 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
+############################
+# Claude Code / MCP artifacts
+############################
+.playwright-mcp/
+docs/superpowers/plans/
