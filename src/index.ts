@@ -2,8 +2,11 @@ import type { Core } from '@strapi/strapi';
 
 /**
  * Read actions the frontend calls anonymously (no API token):
- * GET /api/members, /api/members/:documentId, /api/projects, /api/projects/:documentId,
- * /api/team-members, /api/team-members/:documentId
+ * GET /api/members, /api/members/:documentId
+ * GET /api/projects, /api/projects/:documentId
+ * GET /api/team-members, /api/team-members/:documentId
+ * GET /api/pages, /api/pages/:documentId (Custom dynamic pages)
+ * GET /api/faqs, /api/policy-documents
  */
 const PUBLIC_READ_ACTIONS = [
   'api::member.member.find',
@@ -12,14 +15,17 @@ const PUBLIC_READ_ACTIONS = [
   'api::project.project.findOne',
   'api::team-member.team-member.find',
   'api::team-member.team-member.findOne',
+  'api::page.page.find',
+  'api::page.page.findOne',
+  'api::faq.faq.find',
+  'api::faq.faq.findOne',
+  'api::policy-document.policy-document.find',
+  'api::policy-document.policy-document.findOne',
 ];
 
 /**
- * Grant the Public role read access to Member + Project.
- *
- * Without this the FE gets 403 on every request and surfaces
- * "Unable to load members (403)". Idempotent: only creates the rows that are
- * missing, so re-running against a configured database is a no-op.
+ * Grant the Public role read access to collections.
+ * Idempotent: only creates the rows that are missing.
  */
 async function grantPublicRead(strapi: Core.Strapi) {
   const role = await strapi.db
@@ -54,21 +60,13 @@ async function grantPublicRead(strapi: Core.Strapi) {
 
 export default {
   /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
+   * Register custom fields.
    */
   register({ strapi }: { strapi: Core.Strapi }) {
-    // Server-side twins of the admin registrations in src/admin/app.tsx.
-    // Both sides must use the same uid (global::<name>) or schema validation fails at boot.
     strapi.customFields.register({
       name: 'multi-enum',
       type: 'json',
     });
-    // `string`, not `enumeration`: Strapi normalises enum values to alphanumerics,
-    // which would mangle "Southeast Asia" / "North Africa & Egypt". The FE renders
-    // project.region verbatim, so the exact human-readable string has to survive.
     strapi.customFields.register({
       name: 'single-enum',
       type: 'string',
@@ -76,11 +74,7 @@ export default {
   },
 
   /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
+   * Bootstrap application logic and permissions.
    */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     await grantPublicRead(strapi);

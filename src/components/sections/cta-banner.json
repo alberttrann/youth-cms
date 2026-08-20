@@ -1,0 +1,44 @@
+{
+  "collectionName": "components_sections_cta_banners",
+  "info": {
+    "displayName": "CTA Banner",
+    "icon": "bullhorn",
+    "description": "Full-width call to action banner"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "ctaLabel": {
+      "type": "string",
+      "required": true
+    },
+    "ctaUrl": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "rainbow-gradient",
+        "blue-gradient",
+        "solid-brand",
+        "white-box"
+      ],
+      "default": "rainbow-gradient"
+    },
+    "hideStar": {
+      "type": "boolean",
+      "default": false
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_sections_featured_projects",
+  "info": {
+    "displayName": "Featured Projects",
+    "icon": "archive",
+    "description": "Embed selected projects or latest projects grid"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Featured Projects"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project"
+    },
+    "limit": {
+      "type": "integer",
+      "default": 3
+    },
+    "showViewAll": {
+      "type": "boolean",
+      "default": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

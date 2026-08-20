@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_stat_items",
+  "info": {
+    "displayName": "StatItem",
+    "icon": "chartPie",
+    "description": "A metric item with numeric value and label"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "integer",
+      "required": true
+    },
+    "prefix": {
+      "type": "string",
+      "default": "+"
+    },
+    "suffix": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

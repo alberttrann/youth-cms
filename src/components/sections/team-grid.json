@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_sections_team_grids",
+  "info": {
+    "displayName": "Leadership & Team Grid",
+    "icon": "user",
+    "description": "Embed leadership team or committee members"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Leadership Team"
+    },
+    "termLabel": {
+      "type": "string"
+    },
+    "teamMembers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::team-member.team-member"
+    },
+    "leadershipType": {
+      "type": "enumeration",
+      "enum": [
+        "all",
+        "executive",
+        "continental-director"
+      ],
+      "default": "all"
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

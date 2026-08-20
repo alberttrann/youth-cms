@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_sections_embeds",
+  "info": {
+    "displayName": "Embed (Video / Map / Custom)",
+    "icon": "code",
+    "description": "Embed iframe, Google Maps, or video player"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "embedUrl": {
+      "type": "string",
+      "required": true
+    },
+    "aspectRatio": {
+      "type": "enumeration",
+      "enum": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "auto"
+      ],
+      "default": "16:9"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

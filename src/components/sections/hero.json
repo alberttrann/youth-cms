@@ -1,0 +1,53 @@
+{
+  "collectionName": "components_sections_heroes",
+  "info": {
+    "displayName": "Hero Section",
+    "icon": "crown",
+    "description": "Top header hero section with title, gradient highlights, media, and CTAs"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "highlightTitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "layoutVariant": {
+      "type": "enumeration",
+      "enum": [
+        "centered",
+        "split-media",
+        "video-modal"
+      ],
+      "default": "centered"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "youtubeVideoId": {
+      "type": "string"
+    },
+    "buttons": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

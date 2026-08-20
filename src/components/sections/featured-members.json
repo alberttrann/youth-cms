@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_sections_featured_members",
+  "info": {
+    "displayName": "Featured Members",
+    "icon": "earth",
+    "description": "Embed selected member organizations or latest members"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "default": "Our Member Organizations"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "members": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::member.member"
+    },
+    "limit": {
+      "type": "integer",
+      "default": 6
+    },
+    "showViewAll": {
+      "type": "boolean",
+      "default": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}
