@@ -1,0 +1,45 @@
+{
+  "collectionName": "components_sections_image_galleries",
+  "info": {
+    "displayName": "Image Gallery",
+    "icon": "picture",
+    "description": "Image gallery with grid or featured layout"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "grid",
+        "featured"
+      ],
+      "default": "grid"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "columns": {
+      "type": "integer",
+      "default": 3,
+      "min": 2,
+      "max": 4
+    },
+    "maxVisible": {
+      "type": "integer",
+      "default": 7
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

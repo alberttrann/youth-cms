@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_sections_stats_grids",
+  "info": {
+    "displayName": "Stats Grid",
+    "icon": "chartBubble",
+    "description": "Grid of animated counter statistics"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "enumeration",
+      "enum": [
+        "home",
+        "about"
+      ],
+      "default": "home"
+    },
+    "animated": {
+      "type": "boolean",
+      "default": true
+    },
+    "items": {
+      "type": "component",
+      "component": "shared.stat-item",
+      "repeatable": true,
+      "required": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

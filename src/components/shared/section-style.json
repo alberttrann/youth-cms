@@ -1,0 +1,61 @@
+{
+  "collectionName": "components_shared_section_styles",
+  "info": {
+    "displayName": "SectionStyle",
+    "icon": "brush",
+    "description": "Visual styling and layout options for a section"
+  },
+  "options": {},
+  "attributes": {
+    "background": {
+      "type": "enumeration",
+      "enum": [
+        "white",
+        "light-blue",
+        "dark-navy",
+        "rainbow-soft",
+        "transparent"
+      ],
+      "default": "white"
+    },
+    "paddingTop": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "compact",
+        "normal",
+        "spacious"
+      ],
+      "default": "normal"
+    },
+    "paddingBottom": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "compact",
+        "normal",
+        "spacious"
+      ],
+      "default": "normal"
+    },
+    "containerWidth": {
+      "type": "enumeration",
+      "enum": [
+        "narrow",
+        "default",
+        "wide",
+        "full"
+      ],
+      "default": "default"
+    },
+    "textAlign": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    }
+  }
+}
