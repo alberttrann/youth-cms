@@ -10,12 +10,40 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
+  "config": {
+    "layouts": {
+      "list": ["question", "order", "updatedAt"],
+      "edit": [
+        [{ "name": "question", "size": 12 }],
+        [{ "name": "answer", "size": 12 }],
+        [{ "name": "order", "size": 6 }]
+      ]
+    },
+    "metadatas": {
+      "order": {
+        "edit": {
+          "label": "Thứ tự hiển thị (Display Order)",
+          "description": "Nhập số (0, 1, 2...). Số nhỏ sẽ hiển thị lên đầu danh sách."
+        },
+        "list": {
+          "label": "Thứ tự",
+          "sortable": true
+        }
+      }
+    }
+  },
   "attributes": {
     "question": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "answer": {
-      "type": "text"
+      "type": "text",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
