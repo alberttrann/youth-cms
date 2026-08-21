@@ -456,6 +456,9 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    displayOrder: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'> &
       Schema.Attribute.Private;
@@ -481,7 +484,7 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.Email;
+    email: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -526,7 +529,7 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
       Schema.Attribute.CustomField<
         'global::multi-enum',
         {
-          choices: '1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships';
+          choices: '1=SDG 1 \u2013 No Poverty,2=SDG 2 \u2013 Zero Hunger,3=SDG 3 \u2013 Good Health,4=SDG 4 \u2013 Quality Education,5=SDG 5 \u2013 Gender Equality,6=SDG 6 \u2013 Clean Water,7=SDG 7 \u2013 Affordable Energy,8=SDG 8 \u2013 Decent Work,9=SDG 9 \u2013 Industry Innovation,10=SDG 10 \u2013 Reduced Inequalities,11=SDG 11 \u2013 Sustainable Cities,12=SDG 12 \u2013 Responsible Consumption,13=SDG 13 \u2013 Climate Action,14=SDG 14 \u2013 Life Below Water,15=SDG 15 \u2013 Life On Land,16=SDG 16 \u2013 Peace Justice,17=SDG 17 \u2013 Partnerships';
         }
       >;
     gallery: Schema.Attribute.Media<
@@ -651,7 +654,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       Schema.Attribute.CustomField<
         'global::multi-enum',
         {
-          choices: '1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships';
+          choices: '1=SDG 1 \u2013 No Poverty,2=SDG 2 \u2013 Zero Hunger,3=SDG 3 \u2013 Good Health,4=SDG 4 \u2013 Quality Education,5=SDG 5 \u2013 Gender Equality,6=SDG 6 \u2013 Clean Water,7=SDG 7 \u2013 Affordable Energy,8=SDG 8 \u2013 Decent Work,9=SDG 9 \u2013 Industry Innovation,10=SDG 10 \u2013 Reduced Inequalities,11=SDG 11 \u2013 Sustainable Cities,12=SDG 12 \u2013 Responsible Consumption,13=SDG 13 \u2013 Climate Action,14=SDG 14 \u2013 Life Below Water,15=SDG 15 \u2013 Life On Land,16=SDG 16 \u2013 Peace Justice,17=SDG 17 \u2013 Partnerships';
         }
       >;
     gallery: Schema.Attribute.Media<
@@ -706,7 +709,7 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
   collectionName: 'team_members';
   info: {
     description: 'Leadership team members (Executives & Continental Directors)';
-    displayName: 'Team Member';
+    displayName: 'Leadership Team';
     pluralName: 'team-members';
     singularName: 'team-member';
   };
@@ -731,7 +734,7 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
       Schema.Attribute.CustomField<
         'global::multi-enum',
         {
-          choices: '1=No Poverty,2=Zero Hunger,3=Good Health,4=Quality Education,5=Gender Equality,6=Clean Water,7=Affordable Energy,8=Decent Work,9=Industry Innovation,10=Reduced Inequalities,11=Sustainable Cities,12=Responsible Consumption,13=Climate Action,14=Life Below Water,15=Life On Land,16=Peace Justice,17=Partnerships';
+          choices: '1=SDG 1 \u2013 No Poverty,2=SDG 2 \u2013 Zero Hunger,3=SDG 3 \u2013 Good Health,4=SDG 4 \u2013 Quality Education,5=SDG 5 \u2013 Gender Equality,6=SDG 6 \u2013 Clean Water,7=SDG 7 \u2013 Affordable Energy,8=SDG 8 \u2013 Decent Work,9=SDG 9 \u2013 Industry Innovation,10=SDG 10 \u2013 Reduced Inequalities,11=SDG 11 \u2013 Sustainable Cities,12=SDG 12 \u2013 Responsible Consumption,13=SDG 13 \u2013 Climate Action,14=SDG 14 \u2013 Life Below Water,15=SDG 15 \u2013 Life On Land,16=SDG 16 \u2013 Peace Justice,17=SDG 17 \u2013 Partnerships';
         }
       >;
     leadershipType: Schema.Attribute.Enumeration<
@@ -754,10 +757,24 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
         'Central Asia',
         'West Asia',
         'North Asia',
-        'Africa',
-        'America',
+        'North Africa',
+        'West Africa',
+        'Central Africa',
+        'East Africa',
+        'Southern Africa',
+        'North America',
+        'Central America',
+        'Caribbean',
+        'South America',
         'Australia',
-        'Europe',
+        'New Zealand',
+        'Melanesia',
+        'Micronesia',
+        'Polynesia',
+        'Northern Europe',
+        'Western Europe',
+        'Eastern Europe',
+        'Southern Europe',
       ]
     >;
     role: Schema.Attribute.String & Schema.Attribute.Required;
