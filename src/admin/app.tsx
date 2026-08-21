@@ -99,6 +99,16 @@ export default {
         validator: () => ({}),
       },
     });
+
+    app.addMenuLink({
+      to: '/faq-order',
+      intlLabel: {
+        id: 'global.faq-order.label',
+        defaultMessage: 'FAQ Display Order',
+      },
+      Component: () => import('./extensions/pages/FaqOrderPage'),
+      position: 9,
+    });
   },
   bootstrap(_app: StrapiApp) {},
 };
