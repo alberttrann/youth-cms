@@ -4,7 +4,7 @@
   "info": {
     "singularName": "policy-document",
     "pluralName": "policy-documents",
-    "displayName": "PolicyDocument"
+    "displayName": "Documents"
   },
   "options": {
     "draftAndPublish": true
