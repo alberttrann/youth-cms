@@ -4,7 +4,29 @@
  * global::multi-enum) so schema validation passes at boot.
  */
 import type { StrapiApp } from '@strapi/strapi/admin';
+import { Button } from '@strapi/design-system';
+import { Drag } from '@strapi/icons';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MultiEnumIcon } from './extensions/icons/MultiEnumIcon';
+
+function FaqReorderAction() {
+  const { slug } = useParams<{ slug?: string }>();
+  const navigate = useNavigate();
+
+  if (slug !== 'api::faq.faq') {
+    return null;
+  }
+
+  return (
+    <Button
+      variant="secondary"
+      startIcon={<Drag />}
+      onClick={() => navigate('/faq-order')}
+    >
+      Reorder FAQs
+    </Button>
+  );
+}
 
 /**
  * Y.O.U brand ramp, copied from the frontend's tokens.ts (`colors.brand`)
@@ -109,6 +131,14 @@ export default {
       Component: () => import('./extensions/pages/FaqOrderPage'),
       position: 9,
     });
+
+    const cmPlugin = app.getPlugin('content-manager');
+    if (cmPlugin) {
+      cmPlugin.injectComponent('listView', 'actions', {
+        name: 'faq-reorder-action',
+        Component: FaqReorderAction,
+      });
+    }
   },
   bootstrap(_app: StrapiApp) {},
 };

@@ -12,11 +12,10 @@
   "pluginOptions": {},
   "config": {
     "layouts": {
-      "list": ["question", "answer", "displayOrder"],
+      "list": ["question", "answer"],
       "edit": [
         [{ "name": "question", "size": 12 }],
-        [{ "name": "answer", "size": 12 }],
-        [{ "name": "displayOrder", "size": 12 }]
+        [{ "name": "answer", "size": 12 }]
       ]
     },
     "metadatas": {
@@ -33,13 +32,6 @@
           "placeholder": "The FAQ answer"
         },
         "list": { "label": "Answer" }
-      },
-      "displayOrder": {
-        "edit": {
-          "label": "Display Order",
-          "description": "Sort order in the FAQ list (ascending)"
-        },
-        "list": { "label": "Order" }
       }
     }
   },

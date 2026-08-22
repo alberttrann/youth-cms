@@ -7,8 +7,8 @@ interface FaqRow {
   displayOrder: number;
 }
 
-interface FaqListResponse {
-  data: FaqRow[];
+interface ContentManagerListResponse {
+  results: FaqRow[];
 }
 
 export default function FaqOrderPage() {
@@ -17,16 +17,16 @@ export default function FaqOrderPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const { get, post } = useFetchClient();
+  const { get, put } = useFetchClient();
 
   const loadFaqs = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await get<FaqListResponse>(
-        '/api/faqs?sort[0]=displayOrder:asc&pagination[pageSize]=100'
+      const { data } = await get<ContentManagerListResponse>(
+        '/content-manager/collection-types/api::faq.faq?sort=displayOrder:asc&pageSize=100'
       );
-      setRows(Array.isArray(data?.data) ? data.data : []);
+      setRows(Array.isArray(data?.results) ? data.results : []);
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to load FAQs');
     } finally {
@@ -57,9 +57,13 @@ export default function FaqOrderPage() {
     setError(null);
     const previousRows = rows;
     try {
-      await post('/api/faqs/reorder', {
-        body: { ids: rows.map((row) => row.documentId) },
-      });
+      await Promise.all(
+        rows.map((row, index) =>
+          put(`/content-manager/collection-types/api::faq.faq/${row.documentId}`, {
+            displayOrder: index + 1,
+          })
+        )
+      );
       await loadFaqs();
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to save order');
@@ -69,7 +73,7 @@ export default function FaqOrderPage() {
     }
   };
 
-  if (loading) return <p>Loading FAQs…</p>;
+  if (loading) return <p style={{ padding: '24px' }}>Loading FAQs…</p>;
 
   return (
     <main style={{ padding: '24px', maxWidth: '720px' }}>
@@ -100,7 +104,7 @@ export default function FaqOrderPage() {
             }}
           >
             <strong>{row.question || '(no question)'}</strong>
-            <span style={{ color: '#888', marginLeft: '12px' }}>#{row.displayOrder}</span>
+            <span style={{ color: '#888', marginLeft: '12px' }}>#{index + 1}</span>
           </li>
         ))}
       </ul>
