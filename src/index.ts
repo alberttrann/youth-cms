@@ -5,7 +5,7 @@ import type { Core } from '@strapi/strapi';
  * GET /api/members, /api/members/:documentId
  * GET /api/projects, /api/projects/:documentId
  * GET /api/team-members, /api/team-members/:documentId
- * GET /api/pages, /api/pages/:documentId (Custom dynamic pages)
+ * GET /api/about-us (About Us single type)
  * GET /api/faqs, /api/policy-documents
  */
 const PUBLIC_READ_ACTIONS = [
@@ -15,8 +15,8 @@ const PUBLIC_READ_ACTIONS = [
   'api::project.project.findOne',
   'api::team-member.team-member.find',
   'api::team-member.team-member.findOne',
-  'api::page.page.find',
-  'api::page.page.findOne',
+  'api::about-us.about-us.find',
+  'api::about-us.about-us.findOne',
   'api::faq.faq.find',
   'api::faq.faq.findOne',
   'api::policy-document.policy-document.find',

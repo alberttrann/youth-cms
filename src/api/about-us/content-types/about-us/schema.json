@@ -1,11 +1,11 @@
 {
-  "kind": "collectionType",
-  "collectionName": "pages",
+  "kind": "singleType",
+  "collectionName": "about_us",
   "info": {
-    "singularName": "page",
-    "pluralName": "pages",
-    "displayName": "Pages (Custom Content)",
-    "description": "Dynamic custom content pages with flexible block layout"
+    "singularName": "about-us",
+    "pluralName": "about-uses",
+    "displayName": "About Us",
+    "description": "About Us content with a flexible block layout"
   },
   "options": {
     "draftAndPublish": true
@@ -13,16 +13,7 @@
   "pluginOptions": {},
   "config": {
     "layouts": {
-      "list": [
-        "title",
-        "slug",
-        "updatedAt"
-      ],
       "edit": [
-        [
-          { "name": "title", "size": 6 },
-          { "name": "slug", "size": 6 }
-        ],
         [
           { "name": "seo", "size": 12 }
         ],
@@ -32,29 +23,6 @@
       ]
     },
     "metadatas": {
-      "title": {
-        "edit": {
-          "label": "Page Title",
-          "placeholder": "VD: Annual Summit 2026 / Giới thiệu chương trình Y.O.U",
-          "description": "Tiêu đề của trang (dùng cho quản lý nội bộ và hiển thị mặc định)."
-        },
-        "list": {
-          "label": "Title",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "slug": {
-        "edit": {
-          "label": "URL Slug",
-          "placeholder": "annual-summit-2026",
-          "description": "Đường dẫn URL định danh duy nhất của trang (VD: /pages/annual-summit-2026)."
-        },
-        "list": {
-          "label": "Slug",
-          "searchable": true
-        }
-      },
       "seo": {
         "edit": {
           "label": "SEO & Social Sharing Metadata",
@@ -70,15 +38,6 @@
     }
   },
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title",
-      "required": true
-    },
     "seo": {
       "type": "component",
       "component": "shared.seo",
