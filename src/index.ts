@@ -2,7 +2,7 @@ import type { Core } from '@strapi/strapi';
 
 /**
  * Public actions that anonymous visitors can call:
- * - Read public content (members, projects, leadership, about-us, faqs, policy-documents, global-setting)
+ * - Read public content (members, projects, leadership, about-us, faqs, policy-documents, global-setting, page)
  * - Submit forms (inquiries, leadership applications, org applications, support submissions)
  * - Upload files (media, resumes, photos)
  */
@@ -15,11 +15,14 @@ const PUBLIC_PERMISSIONS = [
   'api::team-member.team-member.find',
   'api::team-member.team-member.findOne',
   'api::about-us.about-us.find',
+  'api::about-us.about-us.findOne',
   'api::faq.faq.find',
   'api::faq.faq.findOne',
   'api::policy-document.policy-document.find',
   'api::policy-document.policy-document.findOne',
   'api::global-setting.global-setting.find',
+  'api::page.page.find',
+  'api::page.page.findOne',
 
   // Public Creates (Forms)
   'api::inquiry.inquiry.create',
@@ -67,6 +70,9 @@ async function grantPublicPermissions(strapi: Core.Strapi) {
 }
 
 export default {
+  /**
+   * Register custom fields.
+   */
   register({ strapi }: { strapi: Core.Strapi }) {
     strapi.customFields.register({
       name: 'multi-enum',
@@ -78,6 +84,9 @@ export default {
     });
   },
 
+  /**
+   * Bootstrap application logic and permissions.
+   */
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     await grantPublicPermissions(strapi);
   },
