@@ -15,7 +15,8 @@
       "type": "string"
     },
     "email": {
-      "type": "email"
+      "type": "string",
+      "regex": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
     },
     "phone": {
       "type": "string"

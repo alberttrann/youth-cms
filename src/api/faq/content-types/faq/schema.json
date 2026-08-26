@@ -10,12 +10,42 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
+  "config": {
+    "layouts": {
+      "list": ["question", "answer"],
+      "edit": [
+        [{ "name": "question", "size": 12 }],
+        [{ "name": "answer", "size": 12 }]
+      ]
+    },
+    "metadatas": {
+      "question": {
+        "edit": {
+          "label": "Question",
+          "placeholder": "The FAQ question"
+        },
+        "list": { "label": "Question" }
+      },
+      "answer": {
+        "edit": {
+          "label": "Answer",
+          "placeholder": "The FAQ answer"
+        },
+        "list": { "label": "Answer" }
+      }
+    }
+  },
   "attributes": {
     "question": {
       "type": "text"
     },
     "answer": {
       "type": "text"
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0,
+      "required": true
     }
   }
 }
