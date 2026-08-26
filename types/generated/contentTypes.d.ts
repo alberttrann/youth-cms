@@ -549,7 +549,7 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
-    displayName: 'Member';
+    displayName: 'Members';
     pluralName: 'members';
     singularName: 'member';
   };
@@ -604,7 +604,7 @@ export interface ApiPolicyDocumentPolicyDocument
   extends Struct.CollectionTypeSchema {
   collectionName: 'policy_documents';
   info: {
-    displayName: 'PolicyDocument';
+    displayName: 'Documents';
     pluralName: 'policy-documents';
     singularName: 'policy-document';
   };
@@ -638,7 +638,7 @@ export interface ApiPolicyDocumentPolicyDocument
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
-    displayName: 'Project';
+    displayName: 'Projects';
     pluralName: 'projects';
     singularName: 'project';
   };
@@ -1244,6 +1244,11 @@ export interface PluginUsersPermissionsUser
   options: {
     draftAndPublish: false;
     timestamps: true;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
