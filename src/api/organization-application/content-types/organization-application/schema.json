@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organization_applications",
+  "info": {
+    "singularName": "organization-application",
+    "pluralName": "organization-applications",
+    "displayName": "Organization Application",
+    "description": "Membership registration applications from youth organizations"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organizationName": { "type": "string", "required": true },
+    "organizationDescription": { "type": "text", "required": true },
+    "representativeFullName": { "type": "string", "required": true },
+    "representativePhone": { "type": "string", "required": true },
+    "representativePhoneCode": { "type": "string", "default": "+84" },
+    "yearOfEstablishment": { "type": "integer", "required": true },
+    "country": { "type": "string", "required": true },
+    "address": { "type": "string", "required": true },
+    "email": { "type": "email", "required": true },
+    "website": { "type": "string" },
+    "facebookUrl": { "type": "string" },
+    "instagramUrl": { "type": "string" },
+    "linkedinUrl": { "type": "string" },
+    "focusArea": { "type": "string", "required": true },
+    "focusSDGs": { "type": "json", "required": true },
+    "organizationImage": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "files"]
+    },
+    "organizationLogo": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "files"]
+    },
+    "projectName": { "type": "string", "required": true },
+    "projectOrganizationName": { "type": "string", "required": true },
+    "projectDescription": { "type": "text", "required": true },
+    "projectLedBy": { "type": "string", "required": true },
+    "socialImpactMetrics": { "type": "text", "required": true },
+    "region": { "type": "string", "required": true },
+    "countriesCovered": { "type": "string", "required": true },
+    "projectFocusSDGs": { "type": "json", "required": true },
+    "projectStatus": { "type": "string", "required": true },
+    "projectImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "files"]
+    },
+    "projectSocialProfile": { "type": "string", "required": true }
+  }
+}

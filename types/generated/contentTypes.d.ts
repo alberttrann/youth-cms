@@ -441,6 +441,52 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutUsAboutUs extends Struct.SingleTypeSchema {
+  collectionName: 'about_us';
+  info: {
+    description: 'About Us content with a flexible block layout';
+    displayName: 'About Us';
+    pluralName: 'about-uses';
+    singularName: 'about-us';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contentBlocks: Schema.Attribute.DynamicZone<
+      [
+        'sections.hero',
+        'sections.rich-text',
+        'sections.media-text',
+        'sections.stats-grid',
+        'sections.cta-banner',
+        'sections.image-gallery',
+        'sections.faq-section',
+        'sections.featured-projects',
+        'sections.featured-members',
+        'sections.team-grid',
+        'sections.embed',
+        'sections.feature-grid',
+        'sections.image-text-grid',
+      ]
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::about-us.about-us'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
   collectionName: 'faqs';
   info: {
@@ -461,6 +507,47 @@ export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     question: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
+  collectionName: 'global_settings';
+  info: {
+    description: 'Global website configuration, contact footer, and donation QR code';
+    displayName: 'Global Setting';
+    pluralName: 'global-settings';
+    singularName: 'global-setting';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    accountHolder: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Youth Organization Union'>;
+    accountNumber: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'000999999999'>;
+    address: Schema.Attribute.Text;
+    bankName: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'MB Bank - Ben Thanh Branch'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String;
+    hotline: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::global-setting.global-setting'
+    > &
+      Schema.Attribute.Private;
+    operatingTime: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    qrCodeImage: Schema.Attribute.Media<'images'>;
+    socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
+    transferSyntaxNote: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -496,6 +583,55 @@ export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLeadershipApplicationLeadershipApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'leadership_applications';
+  info: {
+    description: 'Candidate applications for Continental Director and leadership roles';
+    displayName: 'Leadership Application';
+    pluralName: 'leadership-applications';
+    singularName: 'leadership-application';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    activityPhotos: Schema.Attribute.Media<'images', true>;
+    assessment: Schema.Attribute.JSON & Schema.Attribute.Required;
+    cityTown: Schema.Attribute.String & Schema.Attribute.Required;
+    continent: Schema.Attribute.String & Schema.Attribute.Required;
+    countryOfResidence: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dateOfBirth: Schema.Attribute.Date & Schema.Attribute.Required;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    facebookUrl: Schema.Attribute.String;
+    fullName: Schema.Attribute.String & Schema.Attribute.Required;
+    instagramUrl: Schema.Attribute.String;
+    linkedinUrl: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::leadership-application.leadership-application'
+    > &
+      Schema.Attribute.Private;
+    nationality: Schema.Attribute.String & Schema.Attribute.Required;
+    portfolio: Schema.Attribute.String;
+    profilePhoto: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.String & Schema.Attribute.Required;
+    resumeCv: Schema.Attribute.Media<'files' | 'images', true> &
+      Schema.Attribute.Required;
+    sex: Schema.Attribute.String & Schema.Attribute.Required;
+    sexOther: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    whatsappNumber: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -550,6 +686,65 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOrganizationApplicationOrganizationApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'organization_applications';
+  info: {
+    description: 'Membership registration applications from youth organizations';
+    displayName: 'Organization Application';
+    pluralName: 'organization-applications';
+    singularName: 'organization-application';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    address: Schema.Attribute.String & Schema.Attribute.Required;
+    countriesCovered: Schema.Attribute.String & Schema.Attribute.Required;
+    country: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    facebookUrl: Schema.Attribute.String;
+    focusArea: Schema.Attribute.String & Schema.Attribute.Required;
+    focusSDGs: Schema.Attribute.JSON & Schema.Attribute.Required;
+    instagramUrl: Schema.Attribute.String;
+    linkedinUrl: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::organization-application.organization-application'
+    > &
+      Schema.Attribute.Private;
+    organizationDescription: Schema.Attribute.Text & Schema.Attribute.Required;
+    organizationImage: Schema.Attribute.Media<'images' | 'files', true>;
+    organizationLogo: Schema.Attribute.Media<'images' | 'files', true>;
+    organizationName: Schema.Attribute.String & Schema.Attribute.Required;
+    projectDescription: Schema.Attribute.Text & Schema.Attribute.Required;
+    projectFocusSDGs: Schema.Attribute.JSON & Schema.Attribute.Required;
+    projectImages: Schema.Attribute.Media<'images' | 'files', true>;
+    projectLedBy: Schema.Attribute.String & Schema.Attribute.Required;
+    projectName: Schema.Attribute.String & Schema.Attribute.Required;
+    projectOrganizationName: Schema.Attribute.String &
+      Schema.Attribute.Required;
+    projectSocialProfile: Schema.Attribute.String & Schema.Attribute.Required;
+    projectStatus: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    region: Schema.Attribute.String & Schema.Attribute.Required;
+    representativeFullName: Schema.Attribute.String & Schema.Attribute.Required;
+    representativePhone: Schema.Attribute.String & Schema.Attribute.Required;
+    representativePhoneCode: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'+84'>;
+    socialImpactMetrics: Schema.Attribute.Text & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website: Schema.Attribute.String;
+    yearOfEstablishment: Schema.Attribute.Integer & Schema.Attribute.Required;
   };
 }
 
@@ -699,6 +894,44 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     year: Schema.Attribute.Integer;
+  };
+}
+
+export interface ApiSupportSubmissionSupportSubmission
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'support_submissions';
+  info: {
+    description: 'Letters of well-wishes and financial support contributions';
+    displayName: 'Support Submission';
+    pluralName: 'support-submissions';
+    singularName: 'support-submission';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    donationFrequency: Schema.Attribute.Enumeration<
+      ['monthly', 'quarterly', 'other', 'once']
+    > &
+      Schema.Attribute.DefaultTo<'monthly'>;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    financialGiftDetails: Schema.Attribute.Text;
+    fullName: Schema.Attribute.String & Schema.Attribute.Required;
+    letter: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::support-submission.support-submission'
+    > &
+      Schema.Attribute.Private;
+    projects: Schema.Attribute.JSON & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1294,12 +1527,17 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::faq.faq': ApiFaqFaq;
+      'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
       'api::inquiry.inquiry': ApiInquiryInquiry;
+      'api::leadership-application.leadership-application': ApiLeadershipApplicationLeadershipApplication;
       'api::member.member': ApiMemberMember;
+      'api::organization-application.organization-application': ApiOrganizationApplicationOrganizationApplication;
       'api::page.page': ApiPagePage;
       'api::policy-document.policy-document': ApiPolicyDocumentPolicyDocument;
       'api::project.project': ApiProjectProject;
+      'api::support-submission.support-submission': ApiSupportSubmissionSupportSubmission;
       'api::team-member.team-member': ApiTeamMemberTeamMember;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

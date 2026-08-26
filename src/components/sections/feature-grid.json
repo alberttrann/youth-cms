@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_sections_feature_grids",
+  "info": {
+    "displayName": "Feature / Icon Grid",
+    "icon": "apps",
+    "description": "Grid of icon feature cards (e.g. Mission cards, Core Values)"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "highlightTitle": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "columns": {
+      "type": "integer",
+      "default": 4,
+      "min": 2,
+      "max": 4
+    },
+    "items": {
+      "type": "component",
+      "component": "shared.feature-item",
+      "repeatable": true,
+      "required": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

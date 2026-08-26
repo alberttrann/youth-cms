@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_image_text_items",
+  "info": {
+    "displayName": "ImageTextItem",
+    "icon": "picture",
+    "description": "An item with image, title, and description"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
