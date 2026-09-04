@@ -7,6 +7,7 @@ export default (config: UserConfig) => {
       alias: {
         '@': '/src',
       },
+      dedupe: ['@codemirror/state', '@codemirror/view'],
     },
   });
 };

@@ -1,0 +1,34 @@
+{
+  "kind": "singleType",
+  "collectionName": "global_settings",
+  "info": {
+    "singularName": "global-setting",
+    "pluralName": "global-settings",
+    "displayName": "Global Setting",
+    "description": "Global website configuration, contact footer, and donation QR code"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "address": { "type": "text" },
+    "email": { "type": "string" },
+    "hotline": { "type": "string" },
+    "operatingTime": { "type": "string" },
+    "socialLinks": {
+      "type": "component",
+      "component": "shared.social-link",
+      "repeatable": true
+    },
+    "bankName": { "type": "string", "default": "MB Bank - Ben Thanh Branch" },
+    "accountNumber": { "type": "string", "default": "000999999999" },
+    "accountHolder": { "type": "string", "default": "Youth Organization Union" },
+    "transferSyntaxNote": { "type": "text" },
+    "qrCodeImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    }
+  }
+}

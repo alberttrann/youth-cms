@@ -1,0 +1,50 @@
+{
+  "collectionName": "components_sections_image_text_grids",
+  "info": {
+    "displayName": "Image & Text Grid",
+    "icon": "layout",
+    "description": "Grid of circular or rounded images with titles and descriptions"
+  },
+  "options": {},
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "highlightTitle": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "imageShape": {
+      "type": "enumeration",
+      "enum": [
+        "circle",
+        "rounded",
+        "square"
+      ],
+      "default": "circle"
+    },
+    "columns": {
+      "type": "integer",
+      "default": 5,
+      "min": 2,
+      "max": 6
+    },
+    "items": {
+      "type": "component",
+      "component": "shared.image-text-item",
+      "repeatable": true,
+      "required": true
+    },
+    "style": {
+      "type": "component",
+      "component": "shared.section-style",
+      "repeatable": false
+    }
+  }
+}

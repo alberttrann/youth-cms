@@ -58,6 +58,33 @@ export interface SectionsFaqSection extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsFeatureGrid extends Struct.ComponentSchema {
+  collectionName: 'components_sections_feature_grids';
+  info: {
+    description: 'Grid of icon feature cards (e.g. Mission cards, Core Values)';
+    displayName: 'Feature / Icon Grid';
+    icon: 'apps';
+  };
+  attributes: {
+    columns: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 4;
+          min: 2;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<4>;
+    eyebrow: Schema.Attribute.String;
+    highlightTitle: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'shared.feature-item', true> &
+      Schema.Attribute.Required;
+    style: Schema.Attribute.Component<'shared.section-style', false>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsFeaturedMembers extends Struct.ComponentSchema {
   collectionName: 'components_sections_featured_members';
   info: {
@@ -140,6 +167,35 @@ export interface SectionsImageGallery extends Struct.ComponentSchema {
     title: Schema.Attribute.String;
     variant: Schema.Attribute.Enumeration<['grid', 'featured']> &
       Schema.Attribute.DefaultTo<'grid'>;
+  };
+}
+
+export interface SectionsImageTextGrid extends Struct.ComponentSchema {
+  collectionName: 'components_sections_image_text_grids';
+  info: {
+    description: 'Grid of circular or rounded images with titles and descriptions';
+    displayName: 'Image & Text Grid';
+    icon: 'layout';
+  };
+  attributes: {
+    columns: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 6;
+          min: 2;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<5>;
+    eyebrow: Schema.Attribute.String;
+    highlightTitle: Schema.Attribute.String;
+    imageShape: Schema.Attribute.Enumeration<['circle', 'rounded', 'square']> &
+      Schema.Attribute.DefaultTo<'circle'>;
+    items: Schema.Attribute.Component<'shared.image-text-item', true> &
+      Schema.Attribute.Required;
+    style: Schema.Attribute.Component<'shared.section-style', false>;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -254,6 +310,35 @@ export interface SharedFaqItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedFeatureItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_feature_items';
+  info: {
+    description: 'An item with icon, title, description, and active highlight';
+    displayName: 'FeatureItem';
+    icon: 'star';
+  };
+  attributes: {
+    active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedImageTextItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_image_text_items';
+  info: {
+    description: 'An item with image, title, and description';
+    displayName: 'ImageTextItem';
+    icon: 'picture';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedSectionStyle extends Struct.ComponentSchema {
   collectionName: 'components_shared_section_styles';
   info: {
@@ -335,16 +420,20 @@ declare module '@strapi/strapi' {
       'sections.cta-banner': SectionsCtaBanner;
       'sections.embed': SectionsEmbed;
       'sections.faq-section': SectionsFaqSection;
+      'sections.feature-grid': SectionsFeatureGrid;
       'sections.featured-members': SectionsFeaturedMembers;
       'sections.featured-projects': SectionsFeaturedProjects;
       'sections.hero': SectionsHero;
       'sections.image-gallery': SectionsImageGallery;
+      'sections.image-text-grid': SectionsImageTextGrid;
       'sections.media-text': SectionsMediaText;
       'sections.rich-text': SectionsRichText;
       'sections.stats-grid': SectionsStatsGrid;
       'sections.team-grid': SectionsTeamGrid;
       'shared.button': SharedButton;
       'shared.faq-item': SharedFaqItem;
+      'shared.feature-item': SharedFeatureItem;
+      'shared.image-text-item': SharedImageTextItem;
       'shared.section-style': SharedSectionStyle;
       'shared.seo': SharedSeo;
       'shared.social-link': SharedSocialLink;

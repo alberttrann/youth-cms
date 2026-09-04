@@ -30,7 +30,8 @@
     "styled-components": "^6.0.0"
   },
   "overrides": {
-    "@codemirror/state": "^6.4.1"
+    "@codemirror/state": "6.7.0",
+    "@codemirror/view": "6.43.5"
   },
   "devDependencies": {
     "@types/node": "^20",

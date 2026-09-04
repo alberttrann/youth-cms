@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "support_submissions",
+  "info": {
+    "singularName": "support-submission",
+    "pluralName": "support-submissions",
+    "displayName": "Support Submission",
+    "description": "Letters of well-wishes and financial support contributions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": { "type": "string", "required": true },
+    "email": { "type": "email", "required": true },
+    "projects": { "type": "json", "required": true },
+    "letter": { "type": "text", "required": true },
+    "financialGiftDetails": { "type": "text" },
+    "donationFrequency": {
+      "type": "enumeration",
+      "enum": ["monthly", "quarterly", "other", "once"],
+      "default": "monthly"
+    }
+  }
+}

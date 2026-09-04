@@ -56,7 +56,9 @@
         "sections.featured-projects",
         "sections.featured-members",
         "sections.team-grid",
-        "sections.embed"
+        "sections.embed",
+        "sections.feature-grid",
+        "sections.image-text-grid"
       ]
     }
   }

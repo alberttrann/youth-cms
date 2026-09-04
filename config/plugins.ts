@@ -31,24 +31,28 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
       },
     },
   },
-  email: {
-    config: {
-      provider: 'nodemailer',
-      providerOptions: {
-        host: env('SMTP_HOST'),
-        port: env.int('SMTP_PORT'),
-        secure: env.bool('SMTP_SECURE'),
-        auth: {
-          user: env('SMTP_USERNAME'),
-          pass: env('SMTP_PASSWORD'),
+  ...(env('SMTP_HOST')
+    ? {
+        email: {
+          config: {
+            provider: 'nodemailer',
+            providerOptions: {
+              host: env('SMTP_HOST'),
+              port: env.int('SMTP_PORT', 465),
+              secure: env.bool('SMTP_SECURE', true),
+              auth: {
+                user: env('SMTP_USERNAME'),
+                pass: env('SMTP_PASSWORD'),
+              },
+            },
+            settings: {
+              defaultFrom: env('EMAIL_DEFAULT_FROM', 'no-reply@youthorgunion.com'),
+              defaultReplyTo: env('EMAIL_DEFAULT_REPLY_TO', 'no-reply@youthorgunion.com'),
+            },
+          },
         },
-      },
-      settings: {
-        defaultFrom: env('EMAIL_DEFAULT_FROM'),
-        defaultReplyTo: env('EMAIL_DEFAULT_REPLY_TO'),
-      },
-    },
-  },
+      }
+    : {}),
   upload: {
     config: {
       provider: 'cloudinary',
@@ -58,7 +62,9 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Plugin =>
         api_secret: env('CLOUDINARY_SECRET'),
       },
       actionOptions: {
-        upload: {},
+        upload: {
+          resource_type: 'auto',
+        },
         delete: {},
       },
       security: {

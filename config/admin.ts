@@ -7,6 +7,7 @@ const PREVIEW_PATHS: Record<string, (documentId: string) => string> = {
   'api::team-member.team-member': () => '/leadership',
   'api::policy-document.policy-document': () => '/policy-documents',
   'api::about-us.about-us': () => '/about-us',
+  'api::page.page': (documentId) => `/pages/${encodeURIComponent(documentId)}`,
 };
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => {
