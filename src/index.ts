@@ -8,14 +8,16 @@ import type { Core } from '@strapi/strapi';
  */
 const PUBLIC_PERMISSIONS = [
   // Public Reads
+  'api::home-page.home-page.find',
+  'api::home-page.home-page.findOne',
+  'api::about-us.about-us.find',
+  'api::about-us.about-us.findOne',
   'api::member.member.find',
   'api::member.member.findOne',
   'api::project.project.find',
   'api::project.project.findOne',
   'api::team-member.team-member.find',
   'api::team-member.team-member.findOne',
-  'api::about-us.about-us.find',
-  'api::about-us.about-us.findOne',
   'api::faq.faq.find',
   'api::faq.faq.findOne',
   'api::policy-document.policy-document.find',
@@ -26,13 +28,13 @@ const PUBLIC_PERMISSIONS = [
   'api::news-item.news-item.find',
   'api::news-item.news-item.findOne',
 
-  // Public Creates (Forms)
+  // Public Creates
   'api::inquiry.inquiry.create',
   'api::leadership-application.leadership-application.create',
   'api::organization-application.organization-application.create',
   'api::support-submission.support-submission.create',
 
-  // Public Uploads
+  // Upload
   'plugin::upload.content-api.upload',
 ];
 

@@ -11,7 +11,81 @@
     "draftAndPublish": false
   },
   "pluginOptions": {},
+  "config": {
+    "layouts": {
+      "list": ["organizationName", "country", "representativeFullName", "email", "status", "createdAt"],
+      "edit": [
+        [
+          { "name": "status", "size": 6 },
+          { "name": "reviewedAt", "size": 6 }
+        ],
+        [{ "name": "adminNotes", "size": 12 }],
+        [
+          { "name": "organizationName", "size": 6 },
+          { "name": "yearOfEstablishment", "size": 6 }
+        ],
+        [{ "name": "organizationDescription", "size": 12 }],
+        [
+          { "name": "representativeFullName", "size": 6 },
+          { "name": "representativePhone", "size": 6 }
+        ],
+        [
+          { "name": "country", "size": 6 },
+          { "name": "address", "size": 6 }
+        ],
+        [
+          { "name": "email", "size": 6 },
+          { "name": "website", "size": 6 }
+        ],
+        [
+          { "name": "focusArea", "size": 6 },
+          { "name": "focusSdgs", "size": 6 }
+        ],
+        [
+          { "name": "organizationLogo", "size": 6 },
+          { "name": "organizationImage", "size": 6 }
+        ],
+        [
+          { "name": "projectName", "size": 6 },
+          { "name": "projectLedBy", "size": 6 }
+        ],
+        [{ "name": "projectDescription", "size": 12 }],
+        [{ "name": "socialImpactMetrics", "size": 12 }],
+        [
+          { "name": "region", "size": 6 },
+          { "name": "countriesCovered", "size": 6 }
+        ],
+        [
+          { "name": "projectFocusSdgs", "size": 6 },
+          { "name": "projectStatus", "size": 6 }
+        ],
+        [
+          { "name": "projectImages", "size": 6 },
+          { "name": "projectSocialProfile", "size": 6 }
+        ]
+      ]
+    },
+    "metadatas": {
+      "status": {
+        "edit": { "label": "Membership Review Status" },
+        "list": { "label": "Status", "sortable": true }
+      },
+      "adminNotes": { "edit": { "label": "Internal Review Notes" } }
+    }
+  },
   "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "under_review", "shortlisted", "accepted", "rejected"],
+      "default": "pending",
+      "required": true
+    },
+    "adminNotes": {
+      "type": "text"
+    },
+    "reviewedAt": {
+      "type": "datetime"
+    },
     "organizationName": { "type": "string", "required": true },
     "organizationDescription": { "type": "text", "required": true },
     "representativeFullName": { "type": "string", "required": true },
