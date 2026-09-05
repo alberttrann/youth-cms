@@ -557,32 +557,74 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
-  collectionName: 'inquiries';
+export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
+  collectionName: 'home_pages';
   info: {
-    displayName: 'Inquiry';
-    pluralName: 'inquiries';
-    singularName: 'inquiry';
+    description: 'Homepage dynamic banners, video carousel, vision tabs, stats, and member benefits';
+    displayName: 'Home Page';
+    pluralName: 'home-pages';
+    singularName: 'home-page';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    aboutTabs: Schema.Attribute.Component<'shared.feature-item', true>;
+    aboutTitle: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'A Global Alliance for Youth-Led Impact'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String;
+    heroBanners: Schema.Attribute.Media<'images', true>;
+    heroDescription: Schema.Attribute.Text;
+    heroTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Where Unity Drives Change'>;
+    individualBenefits: Schema.Attribute.JSON;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-page.home-page'
+    > &
+      Schema.Attribute.Private;
+    orgBenefits: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    sdgSectionDescription: Schema.Attribute.Text;
+    stats: Schema.Attribute.Component<'shared.stat-item', true>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    videos: Schema.Attribute.Component<'shared.video-item', true>;
+  };
+}
+
+export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
+  collectionName: 'inquiries';
+  info: {
+    description: 'Contact inquiries submitted by website visitors';
+    displayName: 'Inquiry';
+    pluralName: 'inquiries';
+    singularName: 'inquiry';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::inquiry.inquiry'
     > &
       Schema.Attribute.Private;
-    message: Schema.Attribute.String;
-    name: Schema.Attribute.String;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    reason: Schema.Attribute.String;
+    reason: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -692,6 +734,42 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNewsItemNewsItem extends Struct.CollectionTypeSchema {
+  collectionName: 'news_items';
+  info: {
+    description: 'Impact stories, updates, and announcements';
+    displayName: 'News & Stories';
+    pluralName: 'news-items';
+    singularName: 'news-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Y.O.U Alliance'>;
+    category: Schema.Attribute.String;
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    excerpt: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-item.news-item'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOrganizationApplicationOrganizationApplication
   extends Struct.CollectionTypeSchema {
   collectionName: 'organization_applications';
@@ -714,7 +792,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     email: Schema.Attribute.Email & Schema.Attribute.Required;
     facebookUrl: Schema.Attribute.String;
     focusArea: Schema.Attribute.String & Schema.Attribute.Required;
-    focusSDGs: Schema.Attribute.JSON & Schema.Attribute.Required;
+    focusSdgs: Schema.Attribute.JSON & Schema.Attribute.Required;
     instagramUrl: Schema.Attribute.String;
     linkedinUrl: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -728,7 +806,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     organizationLogo: Schema.Attribute.Media<'images' | 'files', true>;
     organizationName: Schema.Attribute.String & Schema.Attribute.Required;
     projectDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    projectFocusSDGs: Schema.Attribute.JSON & Schema.Attribute.Required;
+    projectFocusSdgs: Schema.Attribute.JSON & Schema.Attribute.Required;
     projectImages: Schema.Attribute.Media<'images' | 'files', true>;
     projectLedBy: Schema.Attribute.String & Schema.Attribute.Required;
     projectName: Schema.Attribute.String & Schema.Attribute.Required;
@@ -776,6 +854,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'sections.featured-members',
         'sections.team-grid',
         'sections.embed',
+        'sections.feature-grid',
+        'sections.image-text-grid',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -1533,9 +1613,11 @@ declare module '@strapi/strapi' {
       'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::faq.faq': ApiFaqFaq;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
+      'api::home-page.home-page': ApiHomePageHomePage;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::leadership-application.leadership-application': ApiLeadershipApplicationLeadershipApplication;
       'api::member.member': ApiMemberMember;
+      'api::news-item.news-item': ApiNewsItemNewsItem;
       'api::organization-application.organization-application': ApiOrganizationApplicationOrganizationApplication;
       'api::page.page': ApiPagePage;
       'api::policy-document.policy-document': ApiPolicyDocumentPolicyDocument;

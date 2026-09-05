@@ -1,13 +1,13 @@
 /**
- * Admin entry - registers the "multi-enum" custom field in the global
- * namespace. Its server-side twin lives in src/index.ts (same uid:
- * global::multi-enum) so schema validation passes at boot.
+ * Admin entry - registers "multi-enum" and "single-enum" custom fields
+ * and custom FAQ order extensions.
  */
 import type { StrapiApp } from '@strapi/strapi/admin';
 import { Button } from '@strapi/design-system';
 import { Drag } from '@strapi/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { MultiEnumIcon } from './extensions/icons/MultiEnumIcon';
+import { SingleEnumIcon } from './extensions/icons/SingleEnumIcon';
 
 function FaqReorderAction() {
   const { slug } = useParams<{ slug?: string }>();
@@ -28,10 +28,6 @@ function FaqReorderAction() {
   );
 }
 
-/**
- * Y.O.U brand ramp, copied from the frontend's tokens.ts (`colors.brand`)
- * so the admin panel matches the public site.
- */
 const brand = {
   100: '#D2E5F4',
   200: '#A5CBE9',
@@ -44,8 +40,6 @@ const brand = {
 export default {
   config: {
     locales: [],
-    // Hide the onboarding video widget + release notifications: fewer
-    // distractions on the Content Manager screens editors actually use.
     tutorials: false,
     notifications: { releases: false },
     theme: {
@@ -74,6 +68,7 @@ export default {
     },
   },
   register(app: StrapiApp) {
+    // 1. Register Multi-Enum Custom Field (Checklist)
     app.customFields.register({
       name: 'multi-enum',
       type: 'json',
@@ -122,6 +117,55 @@ export default {
       },
     });
 
+    // 2. Register Single-Enum Custom Field (Dropdown)
+    app.customFields.register({
+      name: 'single-enum',
+      type: 'string',
+      intlLabel: {
+        id: 'global.single-enum.label',
+        defaultMessage: 'Single-Select (Dropdown)',
+      },
+      intlDescription: {
+        id: 'global.single-enum.description',
+        defaultMessage: 'Pick a single value from a custom list without enum normalization.',
+      },
+      icon: SingleEnumIcon,
+      components: {
+        Input: async () => {
+          const mod = await import('./extensions/fields/SingleEnumInput');
+          return { default: mod.SingleEnumInput };
+        },
+      },
+      options: {
+        base: [
+          {
+            sectionTitle: {
+              id: 'global.single-enum.options',
+              defaultMessage: 'Choices',
+            },
+            items: [
+              {
+                name: 'options.choices' as any,
+                intlLabel: {
+                  id: 'global.single-enum.choices.label',
+                  defaultMessage: 'Choices (comma-separated, e.g. Southeast Asia,East Asia)',
+                },
+                description: {
+                  id: 'global.single-enum.choices.description',
+                  defaultMessage: 'One entry per value; use = to set a custom display label.',
+                } as any,
+                type: 'text' as any,
+                defaultValue: '',
+              } as any,
+            ],
+          },
+        ],
+        advanced: [],
+        validator: () => ({}),
+      },
+    });
+
+    // 3. Register FAQ Ordering Menu Item
     app.addMenuLink({
       to: '/faq-order',
       intlLabel: {

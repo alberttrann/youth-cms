@@ -4,28 +4,33 @@
   "info": {
     "singularName": "inquiry",
     "pluralName": "inquiries",
-    "displayName": "Inquiry"
+    "displayName": "Inquiry",
+    "description": "Contact inquiries submitted by website visitors"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "email": {
       "type": "string",
+      "required": true,
       "regex": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
     },
     "phone": {
       "type": "string"
     },
     "reason": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "message": {
-      "type": "string"
+      "type": "text",
+      "required": true
     }
   }
 }

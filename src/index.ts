@@ -2,7 +2,7 @@ import type { Core } from '@strapi/strapi';
 
 /**
  * Public actions that anonymous visitors can call:
- * - Read public content (members, projects, leadership, about-us, faqs, policy-documents, global-setting, page)
+ * - Read public content (members, projects, leadership, about-us, faqs, policy-documents, global-setting, page, news-items)
  * - Submit forms (inquiries, leadership applications, org applications, support submissions)
  * - Upload files (media, resumes, photos)
  */
@@ -23,6 +23,8 @@ const PUBLIC_PERMISSIONS = [
   'api::global-setting.global-setting.find',
   'api::page.page.find',
   'api::page.page.findOne',
+  'api::news-item.news-item.find',
+  'api::news-item.news-item.findOne',
 
   // Public Creates (Forms)
   'api::inquiry.inquiry.create',
@@ -30,7 +32,7 @@ const PUBLIC_PERMISSIONS = [
   'api::organization-application.organization-application.create',
   'api::support-submission.support-submission.create',
 
-  // Public Upload (Cho phép tải ảnh/CV lên Strapi Media Library)
+  // Public Uploads
   'plugin::upload.content-api.upload',
 ];
 
@@ -71,7 +73,7 @@ async function grantPublicPermissions(strapi: Core.Strapi) {
 
 export default {
   /**
-   * Register custom fields.
+   * Register custom fields on the server.
    */
   register({ strapi }: { strapi: Core.Strapi }) {
     strapi.customFields.register({

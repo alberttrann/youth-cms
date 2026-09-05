@@ -26,7 +26,7 @@
     "instagramUrl": { "type": "string" },
     "linkedinUrl": { "type": "string" },
     "focusArea": { "type": "string", "required": true },
-    "focusSDGs": { "type": "json", "required": true },
+    "focusSdgs": { "type": "json", "required": true },
     "organizationImage": {
       "type": "media",
       "multiple": true,
@@ -44,7 +44,7 @@
     "socialImpactMetrics": { "type": "text", "required": true },
     "region": { "type": "string", "required": true },
     "countriesCovered": { "type": "string", "required": true },
-    "projectFocusSDGs": { "type": "json", "required": true },
+    "projectFocusSdgs": { "type": "json", "required": true },
     "projectStatus": { "type": "string", "required": true },
     "projectImages": {
       "type": "media",
