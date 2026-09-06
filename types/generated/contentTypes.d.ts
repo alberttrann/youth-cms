@@ -560,41 +560,60 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
 export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   collectionName: 'home_pages';
   info: {
-    description: 'Homepage dynamic banners, video carousel, vision tabs, stats, and member benefits';
-    displayName: 'Home Page';
+    description: 'Dynamic homepage content and dynamic blocks layout';
+    displayName: 'Home Page (Dynamic)';
     pluralName: 'home-pages';
     singularName: 'home-page';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    aboutTabs: Schema.Attribute.Component<'shared.feature-item', true>;
-    aboutTitle: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'A Global Alliance for Youth-Led Impact'>;
+    contentBlocks: Schema.Attribute.DynamicZone<
+      [
+        'sections.hero',
+        'sections.rich-text',
+        'sections.media-text',
+        'sections.stats-grid',
+        'sections.cta-banner',
+        'sections.image-gallery',
+        'sections.faq-section',
+        'sections.featured-projects',
+        'sections.featured-members',
+        'sections.team-grid',
+        'sections.embed',
+        'sections.feature-grid',
+        'sections.image-text-grid',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    heroBanners: Schema.Attribute.Media<'images', true>;
-    heroDescription: Schema.Attribute.Text;
-    heroTitle: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Where Unity Drives Change'>;
-    individualBenefits: Schema.Attribute.JSON;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::home-page.home-page'
-    > &
-      Schema.Attribute.Private;
-    orgBenefits: Schema.Attribute.JSON;
+    >;
     publishedAt: Schema.Attribute.DateTime;
-    sdgSectionDescription: Schema.Attribute.Text;
-    stats: Schema.Attribute.Component<'shared.stat-item', true>;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    videos: Schema.Attribute.Component<'shared.video-item', true>;
   };
 }
 
@@ -645,6 +664,7 @@ export interface ApiLeadershipApplicationLeadershipApplication
   };
   attributes: {
     activityPhotos: Schema.Attribute.Media<'images', true>;
+    adminNotes: Schema.Attribute.Text;
     assessment: Schema.Attribute.JSON & Schema.Attribute.Required;
     cityTown: Schema.Attribute.String & Schema.Attribute.Required;
     continent: Schema.Attribute.String & Schema.Attribute.Required;
@@ -671,8 +691,14 @@ export interface ApiLeadershipApplicationLeadershipApplication
     region: Schema.Attribute.String & Schema.Attribute.Required;
     resumeCv: Schema.Attribute.Media<'files' | 'images', true> &
       Schema.Attribute.Required;
+    reviewedAt: Schema.Attribute.DateTime;
     sex: Schema.Attribute.String & Schema.Attribute.Required;
     sexOther: Schema.Attribute.String;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'under_review', 'shortlisted', 'accepted', 'rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pending'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -784,6 +810,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
   };
   attributes: {
     address: Schema.Attribute.String & Schema.Attribute.Required;
+    adminNotes: Schema.Attribute.Text;
     countriesCovered: Schema.Attribute.String & Schema.Attribute.Required;
     country: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
@@ -820,7 +847,13 @@ export interface ApiOrganizationApplicationOrganizationApplication
     representativePhone: Schema.Attribute.String & Schema.Attribute.Required;
     representativePhoneCode: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'+84'>;
+    reviewedAt: Schema.Attribute.DateTime;
     socialImpactMetrics: Schema.Attribute.Text & Schema.Attribute.Required;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'under_review', 'shortlisted', 'accepted', 'rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pending'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -13,12 +13,13 @@
     "start": "strapi start",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "seed": "npm run build && node scripts/seed-all.js"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.50.0",
     "@strapi/plugin-users-permissions": "5.50.0",
-    "@strapi/provider-email-nodemailer": "^5.52.0",
+    "@strapi/provider-email-nodemailer": "^5.50.0",
     "@strapi/provider-upload-cloudinary": "^5.50.0",
     "@strapi/strapi": "5.50.0",
     "better-sqlite3": "12.8.0",

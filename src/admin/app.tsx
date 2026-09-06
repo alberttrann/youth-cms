@@ -168,11 +168,16 @@ export default {
     // 3. Register FAQ Ordering Menu Item
     app.addMenuLink({
       to: '/faq-order',
+      icon: Drag, 
       intlLabel: {
         id: 'global.faq-order.label',
         defaultMessage: 'FAQ Display Order',
       },
-      Component: () => import('./extensions/pages/FaqOrderPage'),
+      Component: async () => {
+        const mod = await import('./extensions/pages/FaqOrderPage');
+        return { default: mod.default };
+      },
+      permissions: [], 
       position: 9,
     });
 
