@@ -1,5 +1,5 @@
 const path = require('path');
-require('dotenv').config(); // 👈 Load .env variables
+require('dotenv').config();
 const { createStrapi } = require('@strapi/strapi');
 
 const GLOBAL_SETTING = {
@@ -20,6 +20,22 @@ const GLOBAL_SETTING = {
     { platform: 'instagram', url: 'https://instagram.com/you.alliance' },
     { platform: 'linkedin', url: 'https://linkedin.com/company/you-alliance' },
   ],
+};
+
+const HOME_PAGE = {
+  seo: {
+    metaTitle: 'Y.O.U – Where Unity Drives Change',
+    metaDescription: 'Youth Organization Union brings together youth-led organizations across continents.',
+  },
+  contentBlocks: [],
+};
+
+const ABOUT_US = {
+  seo: {
+    metaTitle: 'About Us · Y.O.U',
+    metaDescription: 'Learn about Y.O.U mission, vision, and leadership across 6 continents.',
+  },
+  contentBlocks: [],
 };
 
 const FAQS = [
@@ -76,9 +92,8 @@ const TEAM_MEMBERS = [
     displayOrder: 1,
     continent: 'Africa',
     year: '2026 - 2027',
-    bio: 'Founder of Youth Global Network. Committed to empowering young leaders and driving measurable progress across UN SDGs.\n\nBelieves that unity across borders transforms local potential into global change.',
+    bio: 'Founder of Youth Global Network. Committed to empowering young leaders and driving measurable progress across UN SDGs.',
     focusSdgs: ['4', '8', '17'],
-    socialLinks: [{ platform: 'linkedin', url: 'https://linkedin.com' }],
   },
   {
     name: 'Thuy Linh Nguyen T. (Emily)',
@@ -89,7 +104,6 @@ const TEAM_MEMBERS = [
     year: '2026 - 2027',
     bio: 'Founder of CSE Global. Empowering youth to tackle social challenges through social innovation, education, and cross-cultural exchange.',
     focusSdgs: ['4', '5', '17'],
-    socialLinks: [{ platform: 'linkedin', url: 'https://linkedin.com' }],
   },
   {
     name: 'Theodora Abena Yeboah',
@@ -98,43 +112,8 @@ const TEAM_MEMBERS = [
     displayOrder: 3,
     continent: 'Africa',
     year: '2026 - 2027',
-    bio: 'Founder of Education Hub Ghana. Dedicated to closing educational inequalities in marginalized communities through youth advocacy and SDG 4.',
+    bio: 'Founder of Education Hub Ghana. Dedicated to closing educational inequalities in marginalized communities.',
     focusSdgs: ['3', '4'],
-    socialLinks: [{ platform: 'linkedin', url: 'https://linkedin.com' }],
-  },
-  {
-    name: 'Trần Nguyễn Mai Trinh',
-    role: 'Regional Director - Ho Chi Minh City',
-    leadershipType: 'continental-director',
-    displayOrder: 4,
-    continent: 'Asia',
-    regionGroup: 'Southeast Asia',
-    year: '2026',
-    bio: 'Extensive background in international relations and youth delegate programs across Southeast Asia.',
-    focusSdgs: ['5', '10', '16'],
-    socialLinks: [{ platform: 'linkedin', url: 'https://linkedin.com' }],
-  },
-  {
-    name: 'Lê Mạnh Linh (Henry)',
-    role: 'Regional Director - Hanoi',
-    leadershipType: 'continental-director',
-    displayOrder: 5,
-    continent: 'Asia',
-    regionGroup: 'Southeast Asia',
-    year: '2026',
-    bio: 'Senior youth union coordinator focused on digital literacy, quality education, and community volunteering.',
-    focusSdgs: ['4', '5', '11'],
-  },
-  {
-    name: 'Nguyễn Thanh Hải (Hai)',
-    role: 'Regional Director - Ho Chi Minh City',
-    leadershipType: 'continental-director',
-    displayOrder: 6,
-    continent: 'Asia',
-    regionGroup: 'Southeast Asia',
-    year: '2026',
-    bio: 'International relations coordinator driving youth diplomacy and social development projects.',
-    focusSdgs: ['4'],
   },
 ];
 
@@ -144,40 +123,27 @@ const MEMBERS = [
     country: 'Vietnam',
     continent: 'Asia',
     shortDescription: 'Empowering global youth through social impact initiatives and leadership certification.',
-    description: 'CSE Global connects young leaders through learning exchanges, global citizenship programs, and sustainable development projects across Southeast Asia.',
+    description: 'CSE Global connects young leaders through learning exchanges and sustainable development projects.',
     period: '2021 → present',
     leader: 'Thuy Linh Nguyen',
     focusSdgs: ['4', '10', '17'],
-    socialLinks: [{ platform: 'facebook', url: 'https://facebook.com' }],
   },
   {
     name: 'Education Hub Ghana',
     country: 'Ghana',
     continent: 'Africa',
     shortDescription: 'Closing education gaps in marginalized communities through SDG 4 programs.',
-    description: 'Education Hub Ghana operates to ensure quality education access for vulnerable youth and build resilient community learning centers.',
+    description: 'Education Hub Ghana operates to ensure quality education access for vulnerable youth.',
     period: '2019 → present',
     leader: 'Theodora Yeboah',
     focusSdgs: ['9', '16', '17'],
-    socialLinks: [{ platform: 'linkedin', url: 'https://linkedin.com' }],
-  },
-  {
-    name: 'YouthBridge PH',
-    country: 'Philippines',
-    continent: 'Asia',
-    shortDescription: 'Youth-led local action for social inclusion, disaster resilience, and community services.',
-    description: 'YouthBridge PH mobilizes youth leaders in community development, disaster preparedness, and sustainable education outreach.',
-    period: '2021 → present',
-    leader: 'Maria Santos',
-    focusSdgs: ['1', '4', '8'],
-    socialLinks: [{ platform: 'facebook', url: 'https://facebook.com' }],
   },
 ];
 
 const PROJECTS = [
   {
     name: 'Global Diplomacy Leadership Certification',
-    description: 'A global training and certification platform empowering youth delegates in international diplomacy, civic innovation, and SDG action.',
+    description: 'A global training platform empowering youth delegates in international diplomacy and SDG action.',
     impactIndication: '1,500 Beneficiaries reached, 5,530 training hours delivered',
     region: 'Southeast Asia',
     countriesCovered: 'Vietnam, Cambodia, Laos, Philippines, Ghana',
@@ -186,28 +152,29 @@ const PROJECTS = [
     year: 2026,
     memberName: 'CSE Global',
   },
-  {
-    name: 'Green Belt Movement',
-    description: 'Youth-led reforestation and climate advocacy project planting 500,000+ trees to combat deforestation across East Africa.',
-    impactIndication: '500,000 trees planted across 200 communities',
-    region: 'East Africa',
-    countriesCovered: 'Kenya, Tanzania, Uganda',
-    focusSdgs: ['13', '15'],
-    projectStatus: 'ongoing',
-    year: 2025,
-    memberName: 'Education Hub Ghana',
-  },
-  {
-    name: 'Education for All Initiative',
-    description: 'Providing digital learning hubs and scholarships for underprivileged youth in remote and mountainous rural provinces.',
-    impactIndication: '2,000+ students supported across 15 provinces',
-    region: 'Southeast Asia',
-    countriesCovered: 'Vietnam, Cambodia, Laos',
-    focusSdgs: ['4', '10'],
-    projectStatus: 'ongoing',
-    year: 2024,
-    memberName: 'CSE Global',
-  },
+];
+
+const ALL_PERMISSIONS = [
+  // Content Types Full CRUD
+  'api::project.project.find', 'api::project.project.findOne', 'api::project.project.create', 'api::project.project.update', 'api::project.project.delete',
+  'api::member.member.find', 'api::member.member.findOne', 'api::member.member.create', 'api::member.member.update', 'api::member.member.delete',
+  'api::team-member.team-member.find', 'api::team-member.team-member.findOne', 'api::team-member.team-member.create', 'api::team-member.team-member.update', 'api::team-member.team-member.delete',
+  'api::news-item.news-item.find', 'api::news-item.news-item.findOne', 'api::news-item.news-item.create', 'api::news-item.news-item.update', 'api::news-item.news-item.delete',
+  'api::faq.faq.find', 'api::faq.faq.findOne', 'api::faq.faq.create', 'api::faq.faq.update', 'api::faq.faq.delete',
+  'api::policy-document.policy-document.find', 'api::policy-document.policy-document.findOne', 'api::policy-document.policy-document.create', 'api::policy-document.policy-document.update', 'api::policy-document.policy-document.delete',
+  'api::home-page.home-page.find', 'api::home-page.home-page.findOne', 'api::home-page.home-page.update',
+  'api::about-us.about-us.find', 'api::about-us.about-us.findOne', 'api::about-us.about-us.update',
+  'api::global-setting.global-setting.find', 'api::global-setting.global-setting.findOne', 'api::global-setting.global-setting.update',
+  'api::page.page.find', 'api::page.page.findOne', 'api::page.page.create', 'api::page.page.update', 'api::page.page.delete',
+  // Applications & Inquiries
+  'api::leadership-application.leadership-application.find', 'api::leadership-application.leadership-application.findOne', 'api::leadership-application.leadership-application.update', 'api::leadership-application.leadership-application.delete',
+  'api::organization-application.organization-application.find', 'api::organization-application.organization-application.findOne', 'api::organization-application.organization-application.update', 'api::organization-application.organization-application.delete',
+  'api::inquiry.inquiry.find', 'api::inquiry.inquiry.findOne', 'api::inquiry.inquiry.update', 'api::inquiry.inquiry.delete',
+  'api::support-submission.support-submission.find', 'api::support-submission.support-submission.findOne', 'api::support-submission.support-submission.update', 'api::support-submission.support-submission.delete',
+  // Upload plugin
+  'plugin::upload.content-api.upload', 'plugin::upload.content-api.find', 'plugin::upload.content-api.findOne', 'plugin::upload.content-api.destroy',
+  // User profile
+  'plugin::users-permissions.user.me',
 ];
 
 async function upsertDocument(strapi, uid, data, matchField = 'name') {
@@ -228,8 +195,13 @@ async function upsertDocument(strapi, uid, data, matchField = 'name') {
       doc = await strapi.documents(uid).create({ data });
     }
 
-    if (doc?.documentId) {
-      await strapi.documents(uid).publish({ documentId: doc.documentId });
+    //  Only publish if the content type has Draft & Publish enabled
+    if (doc?.documentId && typeof strapi.documents(uid).publish === 'function') {
+      try {
+        await strapi.documents(uid).publish({ documentId: doc.documentId });
+      } catch (e) {
+        // Safe ignore if already published
+      }
     }
     return doc;
   } catch (err) {
@@ -237,65 +209,44 @@ async function upsertDocument(strapi, uid, data, matchField = 'name') {
   }
 }
 
+async function grantPermissionsViaService(strapi) {
+  const { synchronizeRbacPermissions } = require('../dist/src/utils/rbac');
+  await synchronizeRbacPermissions(strapi);
+}
+
 async function seedAll() {
   console.log('🌱 Starting comprehensive Strapi database seeding...\n');
-  
   const appDir = path.resolve(__dirname, '..');
   const distDir = path.resolve(appDir, 'dist');
-
-  // 👈 Tell Strapi to load the compiled config from dist/
   const strapi = await createStrapi({ appDir, distDir }).load();
 
   try {
-    // 1. Global Setting
+    // 1. Single Types (Home, About, Global Setting)
     await upsertDocument(strapi, 'api::global-setting.global-setting', GLOBAL_SETTING, 'email');
-    console.log('✅ Global Setting seeded');
+    await upsertDocument(strapi, 'api::home-page.home-page', HOME_PAGE, 'id');
+    await upsertDocument(strapi, 'api::about-us.about-us', ABOUT_US, 'id');
+    console.log('✅ Single Types seeded (Home, About, Global Setting)');
 
-    // 2. FAQs
-    for (const faq of FAQS) {
-      await upsertDocument(strapi, 'api::faq.faq', faq, 'question');
-    }
-    console.log(`✅ ${FAQS.length} FAQs seeded`);
+    // 2. Collections
+    for (const faq of FAQS) await upsertDocument(strapi, 'api::faq.faq', faq, 'question');
+    for (const doc of POLICY_DOCUMENTS) await upsertDocument(strapi, 'api::policy-document.policy-document', doc, 'title');
+    for (const news of NEWS_ITEMS) await upsertDocument(strapi, 'api::news-item.news-item', news, 'title');
+    for (const member of TEAM_MEMBERS) await upsertDocument(strapi, 'api::team-member.team-member', member, 'name');
 
-    // 3. Policy Documents
-    for (const doc of POLICY_DOCUMENTS) {
-      await upsertDocument(strapi, 'api::policy-document.policy-document', doc, 'title');
-    }
-    console.log(`✅ ${POLICY_DOCUMENTS.length} Policy Documents seeded`);
-
-    // 4. News Items
-    for (const news of NEWS_ITEMS) {
-      await upsertDocument(strapi, 'api::news-item.news-item', news, 'title');
-    }
-    console.log(`✅ ${NEWS_ITEMS.length} News Items seeded`);
-
-    // 5. Team Members (Leadership)
-    for (const member of TEAM_MEMBERS) {
-      await upsertDocument(strapi, 'api::team-member.team-member', member, 'name');
-    }
-    console.log(`✅ ${TEAM_MEMBERS.length} Leadership Team Members seeded`);
-
-    // 6. Member Organizations
     const memberIdMap = {};
     for (const member of MEMBERS) {
       const doc = await upsertDocument(strapi, 'api::member.member', member, 'name');
-      if (doc?.documentId) {
-        memberIdMap[member.name] = doc.documentId;
-      }
+      if (doc?.documentId) memberIdMap[member.name] = doc.documentId;
     }
-    console.log(`✅ ${MEMBERS.length} Member Organizations seeded`);
 
-    // 7. Projects (Linked to Member IDs)
     for (const { memberName, ...proj } of PROJECTS) {
       const memberDocId = memberIdMap[memberName];
-      await upsertDocument(
-        strapi,
-        'api::project.project',
-        { ...proj, member: memberDocId || undefined },
-        'name'
-      );
+      await upsertDocument(strapi, 'api::project.project', { ...proj, member: memberDocId || undefined }, 'name');
     }
-    console.log(`✅ ${PROJECTS.length} Projects seeded (linked to members)`);
+    console.log('✅ Collections seeded');
+
+    // 3. Grant Permissions to Authenticated & Public User Roles
+    await grantPermissionsViaService(strapi);
 
     console.log('\n🎉 Comprehensive database seeding completed successfully!');
   } catch (error) {

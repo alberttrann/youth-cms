@@ -22,6 +22,7 @@
     "@strapi/provider-email-nodemailer": "^5.50.0",
     "@strapi/provider-upload-cloudinary": "^5.50.0",
     "@strapi/strapi": "5.50.0",
+    "bcryptjs": "^3.0.3",
     "better-sqlite3": "12.8.0",
     "nanoclone": "^1.0.2",
     "pg": "^8.22.0",
