@@ -22,9 +22,9 @@ export default {
     }
 
     let authenticatedUser: any = null;
-    let userRole: any = null;
+    let isAdminSource = false;
 
-    // 1. Check if user is a Strapi Super Admin (admin::user)
+    // 1. Check if user is in Strapi Admin User table
     const adminUser = await strapi.db.query('admin::user').findOne({
       where: {
         $or: [{ email: targetEmail }, { username: targetEmail }],
@@ -37,44 +37,86 @@ export default {
       const isValidAdmin = await bcrypt.compare(password, adminUser.password);
       if (isValidAdmin) {
         authenticatedUser = adminUser;
-        userRole = {
-          id: adminUser.roles?.[0]?.id || 1,
-          name: adminUser.roles?.[0]?.name || 'Super Admin',
-          code: adminUser.roles?.[0]?.code || 'admin',
-          type: 'admin',
-        };
+        isAdminSource = true;
       }
     }
 
-    // 2. If not Super Admin, check Staff Accounts (plugin::users-permissions.user)
-    if (!authenticatedUser) {
-      const upUser = await strapi.db.query('plugin::users-permissions.user').findOne({
-        where: {
-          $or: [{ email: targetEmail }, { username: targetEmail }],
-        },
-        populate: ['role'],
-      });
+    // 2. Fallback: check Content API Staff User table
+    let upUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+      where: {
+        $or: [{ email: targetEmail }, { username: targetEmail }],
+      },
+      populate: ['role'],
+    });
 
-      if (upUser && !upUser.blocked) {
-        const isValidStaff = await bcrypt.compare(password, upUser.password);
-        if (isValidStaff) {
-          authenticatedUser = upUser;
-          const roleType = resolveRoleType(upUser.role);
-          userRole = {
-            id: upUser.role?.id || 2,
-            name: upUser.role?.name || 'Staff Member',
-            type: roleType,
-          };
-        }
+    if (!authenticatedUser && upUser && !upUser.blocked) {
+      const isValidStaff = await bcrypt.compare(password, upUser.password);
+      if (isValidStaff) {
+        authenticatedUser = upUser;
       }
     }
 
-    // 3. If neither matched
     if (!authenticatedUser) {
       return ctx.badRequest('Invalid email or password.');
     }
 
-    // 4. Retrieve master session token for API execution
+    // 3. Resolve roles without overwriting intentional assignments
+    const superAdminRole = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: { $or: [{ name: 'Super Admin' }, { type: 'admin' }] },
+    });
+
+    const viewerRole = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: { $or: [{ name: 'Viewer / Auditor' }, { type: 'viewer' }] },
+    });
+
+    const authDefaultRole = await strapi.db.query('plugin::users-permissions.role').findOne({
+      where: { type: 'authenticated' },
+    });
+
+    if (!upUser) {
+      // First-time sync: Admins get Super Admin, other accounts get Viewer (least privilege)
+      const initialRoleId = isAdminSource
+        ? superAdminRole?.id || authDefaultRole?.id || 1
+        : viewerRole?.id || authDefaultRole?.id || 1;
+
+      upUser = await strapi.db.query('plugin::users-permissions.user').create({
+        data: {
+          username: authenticatedUser.username || targetEmail.split('@')[0],
+          email: targetEmail,
+          password: authenticatedUser.password,
+          confirmed: true,
+          blocked: false,
+          role: initialRoleId,
+        },
+        populate: ['role'],
+      });
+    } else if (isAdminSource && (!upUser.role || upUser.role.type === 'authenticated')) {
+      // Upgrade to Super Admin ONLY on first initialization (not if previously demoted or changed)
+      await strapi.db.query('plugin::users-permissions.user').update({
+        where: { id: upUser.id },
+        data: {
+          role: superAdminRole?.id,
+          confirmed: true,
+          blocked: false,
+        },
+      });
+      upUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+        where: { id: upUser.id },
+        populate: ['role'],
+      });
+    }
+
+    // 4. Determine final resolved role from the database
+    const assignedRole = upUser?.role || (isAdminSource ? superAdminRole : viewerRole);
+    const resolvedType = resolveRoleType(assignedRole);
+
+    const userRole = {
+      id: assignedRole?.id || 1,
+      name: assignedRole?.name || (resolvedType === 'admin' ? 'Super Admin' : 'Staff Member'),
+      type: resolvedType,
+    };
+
+    // 5. Retrieve master token for backend operation authorization
     let masterToken = strapi.config.get('portal.masterKey');
     if (!masterToken) {
       const crypto = require('crypto');
@@ -85,7 +127,7 @@ export default {
     }
 
     strapi.log.info(
-      `🔑 [Portal Auth] Staff sign-in successful: ${authenticatedUser.email} (${userRole.name} [${userRole.type}])`
+      `🔑 [Portal Auth] Sign-in successful: ${authenticatedUser.email} (${userRole.name} [${userRole.type}])`
     );
 
     return ctx.send({

@@ -75,17 +75,52 @@ const ALL_STAFF_ACTIONS = [
   'plugin::users-permissions.auth.callback', 'plugin::users-permissions.auth.connect',
 ];
 
+const DESIRED_ROLES = [
+  { name: 'Super Admin', description: 'Full access to all portal settings and content.', type: 'admin' },
+  { name: 'Content Editor', description: 'Can create, edit, and publish content.', type: 'editor' },
+  { name: 'HR / Reviewer', description: 'Review candidate applications and letters.', type: 'reviewer' },
+  { name: 'Viewer / Auditor', description: 'Read-only access to portal metrics.', type: 'viewer' },
+];
+
 export async function synchronizeRbacPermissions(strapi: Core.Strapi) {
   try {
-    const roles = await strapi.db.query('plugin::users-permissions.role').findMany();
+    // 1. Ensure custom roles exist
+    const existingRoles = await strapi.db.query('plugin::users-permissions.role').findMany();
 
-    for (const role of roles) {
+    for (const desired of DESIRED_ROLES) {
+      const exists = existingRoles.some(
+        (r: any) =>
+          r.name?.toLowerCase() === desired.name.toLowerCase() ||
+          r.type?.toLowerCase() === desired.type.toLowerCase()
+      );
+
+      if (!exists) {
+        await strapi.db.query('plugin::users-permissions.role').create({
+          data: {
+            name: desired.name,
+            description: desired.description,
+            type: desired.type,
+          },
+        });
+        strapi.log.info(`👥 [RBAC] Created role: ${desired.name}`);
+      }
+    }
+
+    // 2. Fetch fresh list of roles
+    const allRoles = await strapi.db.query('plugin::users-permissions.role').findMany();
+    const superAdminRole = allRoles.find(
+      (r: any) => r.name?.toLowerCase() === 'super admin' || r.type === 'admin'
+    );
+
+    // 3. Populate explicit permission rows in up_permissions table
+    for (const role of allRoles) {
       const targetActions = role.type === 'public' ? PUBLIC_ACTIONS : ALL_STAFF_ACTIONS;
 
       const existingPerms = await strapi.db.query('plugin::users-permissions.permission').findMany({
         where: { role: role.id },
         select: ['action'],
       });
+
       const existingSet = new Set(existingPerms.map((p: any) => p.action));
       const missing = targetActions.filter((a) => !existingSet.has(a));
 
@@ -96,7 +131,52 @@ export async function synchronizeRbacPermissions(strapi: Core.Strapi) {
       }
     }
 
-    strapi.log.info('🔒 [RBAC Sync] All Content API permissions populated in database successfully.');
+    // 4. Synchronize Strapi Admin Users into Content API without overriding custom roles
+    if (superAdminRole) {
+      const adminUsers = await strapi.db.query('admin::user').findMany({
+        where: { isActive: true },
+        populate: ['roles'],
+      });
+
+      for (const adminUser of adminUsers) {
+        const email = adminUser.email.toLowerCase();
+        let upUser = await strapi.db.query('plugin::users-permissions.user').findOne({
+          where: { email },
+          populate: ['role'],
+        });
+
+        if (upUser) {
+          //  ONLY upgrade if the user has NO role or is on the generic 'authenticated' role
+          const isGeneric = !upUser.role || upUser.role.type === 'authenticated';
+          if (isGeneric) {
+            await strapi.db.query('plugin::users-permissions.user').update({
+              where: { id: upUser.id },
+              data: {
+                role: superAdminRole.id,
+                confirmed: true,
+                blocked: false,
+              },
+            });
+            strapi.log.info(`👑 [RBAC Sync] Initialized Super Admin role for ${email}`);
+          }
+        } else {
+          // First-time creation
+          await strapi.db.query('plugin::users-permissions.user').create({
+            data: {
+              username: adminUser.username || email.split('@')[0],
+              email,
+              password: adminUser.password,
+              confirmed: true,
+              blocked: false,
+              role: superAdminRole.id,
+            },
+          });
+          strapi.log.info(`👑 [RBAC Sync] Created matching Super Admin account for ${email}`);
+        }
+      }
+    }
+
+    strapi.log.info('🔒 [RBAC Sync] Roles, permissions, and Super Admin accounts synchronized.');
   } catch (err: any) {
     strapi.log.error(`[RBAC Sync Error]: ${err?.message || err}`);
   }
