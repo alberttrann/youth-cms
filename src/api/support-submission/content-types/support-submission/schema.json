@@ -12,6 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": ["received", "acknowledged", "processed"],
+      "default": "received"
+    },
+    "adminNotes": {
+      "type": "text"
+    },
     "fullName": { "type": "string", "required": true },
     "email": { "type": "email", "required": true },
     "projects": { "type": "json", "required": true },

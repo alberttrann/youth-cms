@@ -12,6 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": ["unread", "in_progress", "resolved", "archived"],
+      "default": "unread"
+    },
+    "adminNotes": {
+      "type": "text"
+    },
     "name": {
       "type": "string",
       "required": true
