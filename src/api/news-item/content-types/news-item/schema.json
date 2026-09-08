@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news_items",
+  "info": {
+    "singularName": "news-item",
+    "pluralName": "news-items",
+    "displayName": "News & Stories",
+    "description": "Impact stories, updates, and announcements"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "config": {
+    "layouts": {
+      "list": ["title", "category", "date", "author"],
+      "edit": [
+        [{ "name": "title", "size": 12 }],
+        [{ "name": "excerpt", "size": 12 }],
+        [{ "name": "content", "size": 12 }],
+        [
+          { "name": "category", "size": 4 },
+          { "name": "date", "size": 4 },
+          { "name": "author", "size": 4 }
+        ],
+        [{ "name": "image", "size": 12 }]
+      ]
+    },
+    "metadatas": {
+      "title": { "list": { "label": "Title", "searchable": true } },
+      "category": { "list": { "label": "Category / Region" } },
+      "date": { "list": { "label": "Date", "sortable": true } },
+      "author": { "list": { "label": "Author" } }
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"]
+    },
+    "date": {
+      "type": "date"
+    },
+    "category": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string",
+      "default": "Y.O.U Alliance"
+    }
+  }
+}

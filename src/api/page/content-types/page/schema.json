@@ -35,8 +35,8 @@
       "title": {
         "edit": {
           "label": "Page Title",
-          "placeholder": "VD: Annual Summit 2026 / Giới thiệu chương trình Y.O.U",
-          "description": "Tiêu đề của trang (dùng cho quản lý nội bộ và hiển thị mặc định)."
+          "placeholder": "e.g. Annual Summit 2026 / Introduction to Y.O.U Program",
+          "description": "Internal and default display title for the page."
         },
         "list": {
           "label": "Title",
@@ -48,7 +48,7 @@
         "edit": {
           "label": "URL Slug",
           "placeholder": "annual-summit-2026",
-          "description": "Đường dẫn URL định danh duy nhất của trang (VD: /pages/annual-summit-2026)."
+          "description": "Unique URL identifier for the page (e.g. /pages/annual-summit-2026)."
         },
         "list": {
           "label": "Slug",
@@ -58,13 +58,13 @@
       "seo": {
         "edit": {
           "label": "SEO & Social Sharing Metadata",
-          "description": "Cấu hình tiêu đề tab, mô tả thẻ mạng xã hội khi chia sẻ link."
+          "description": "Configure title tag, meta description, and social share image."
         }
       },
       "contentBlocks": {
         "edit": {
           "label": "Content Layout (Dynamic Sections)",
-          "description": "Tự do thêm, xóa, và kéo thả thay đổi vị trí các Section để xây dựng bố cục trang."
+          "description": "Add, remove, and reorder sections to construct the page layout."
         }
       }
     }
@@ -97,7 +97,9 @@
         "sections.featured-projects",
         "sections.featured-members",
         "sections.team-grid",
-        "sections.embed"
+        "sections.embed",
+        "sections.feature-grid",
+        "sections.image-text-grid"
       ]
     }
   }

@@ -1,0 +1,65 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Home Page (Dynamic)",
+    "description": "Dynamic homepage content and dynamic blocks layout"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "config": {
+    "layouts": {
+      "edit": [
+        [{ "name": "seo", "size": 12 }],
+        [{ "name": "contentBlocks", "size": 12 }]
+      ]
+    },
+    "metadatas": {
+      "seo": { "edit": { "label": "SEO Metadata" } },
+      "contentBlocks": { "edit": { "label": "Homepage Content Sections (Drag & Drop)" } }
+    }
+  },
+  "attributes": {
+    "seo": {
+      "type": "component",
+      "component": "shared.seo",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "contentBlocks": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero",
+        "sections.rich-text",
+        "sections.media-text",
+        "sections.stats-grid",
+        "sections.cta-banner",
+        "sections.image-gallery",
+        "sections.faq-section",
+        "sections.featured-projects",
+        "sections.featured-members",
+        "sections.team-grid",
+        "sections.embed",
+        "sections.feature-grid",
+        "sections.image-text-grid"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

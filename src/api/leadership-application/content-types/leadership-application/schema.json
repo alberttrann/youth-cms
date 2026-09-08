@@ -11,7 +11,77 @@
     "draftAndPublish": false
   },
   "pluginOptions": {},
+  "config": {
+    "layouts": {
+      "list": ["fullName", "continent", "region", "email", "status", "createdAt"],
+      "edit": [
+        [
+          { "name": "status", "size": 6 },
+          { "name": "reviewedAt", "size": 6 }
+        ],
+        [{ "name": "adminNotes", "size": 12 }],
+        [
+          { "name": "fullName", "size": 6 },
+          { "name": "sex", "size": 3 },
+          { "name": "sexOther", "size": 3 }
+        ],
+        [
+          { "name": "dateOfBirth", "size": 4 },
+          { "name": "nationality", "size": 4 },
+          { "name": "countryOfResidence", "size": 4 }
+        ],
+        [
+          { "name": "cityTown", "size": 4 },
+          { "name": "email", "size": 4 },
+          { "name": "whatsappNumber", "size": 4 }
+        ],
+        [
+          { "name": "continent", "size": 6 },
+          { "name": "region", "size": 6 }
+        ],
+        [
+          { "name": "profilePhoto", "size": 6 },
+          { "name": "resumeCv", "size": 6 }
+        ],
+        [{ "name": "activityPhotos", "size": 12 }],
+        [
+          { "name": "facebookUrl", "size": 4 },
+          { "name": "instagramUrl", "size": 4 },
+          { "name": "linkedinUrl", "size": 4 }
+        ],
+        [{ "name": "portfolio", "size": 12 }],
+        [{ "name": "assessment", "size": 12 }]
+      ]
+    },
+    "metadatas": {
+      "status": {
+        "edit": {
+          "label": "Recruitment Review Status",
+          "description": "Update application status in the review pipeline"
+        },
+        "list": { "label": "Status", "sortable": true }
+      },
+      "adminNotes": {
+        "edit": {
+          "label": "Internal Staff Notes",
+          "placeholder": "Screening notes, interview feedback, rating..."
+        }
+      }
+    }
+  },
   "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "under_review", "shortlisted", "accepted", "rejected"],
+      "default": "pending",
+      "required": true
+    },
+    "adminNotes": {
+      "type": "text"
+    },
+    "reviewedAt": {
+      "type": "datetime"
+    },
     "fullName": { "type": "string", "required": true },
     "sex": { "type": "string", "required": true },
     "sexOther": { "type": "string" },

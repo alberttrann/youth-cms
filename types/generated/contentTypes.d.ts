@@ -557,32 +557,98 @@ export interface ApiGlobalSettingGlobalSetting extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
+  collectionName: 'home_pages';
+  info: {
+    description: 'Dynamic homepage content and dynamic blocks layout';
+    displayName: 'Home Page (Dynamic)';
+    pluralName: 'home-pages';
+    singularName: 'home-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    contentBlocks: Schema.Attribute.DynamicZone<
+      [
+        'sections.hero',
+        'sections.rich-text',
+        'sections.media-text',
+        'sections.stats-grid',
+        'sections.cta-banner',
+        'sections.image-gallery',
+        'sections.faq-section',
+        'sections.featured-projects',
+        'sections.featured-members',
+        'sections.team-grid',
+        'sections.embed',
+        'sections.feature-grid',
+        'sections.image-text-grid',
+      ]
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-page.home-page'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiInquiryInquiry extends Struct.CollectionTypeSchema {
   collectionName: 'inquiries';
   info: {
+    description: 'Contact inquiries submitted by website visitors';
     displayName: 'Inquiry';
     pluralName: 'inquiries';
     singularName: 'inquiry';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    adminNotes: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String;
+    email: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::inquiry.inquiry'
     > &
       Schema.Attribute.Private;
-    message: Schema.Attribute.String;
-    name: Schema.Attribute.String;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    reason: Schema.Attribute.String;
+    reason: Schema.Attribute.String & Schema.Attribute.Required;
+    status: Schema.Attribute.Enumeration<
+      ['unread', 'in_progress', 'resolved', 'archived']
+    > &
+      Schema.Attribute.DefaultTo<'unread'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -603,6 +669,7 @@ export interface ApiLeadershipApplicationLeadershipApplication
   };
   attributes: {
     activityPhotos: Schema.Attribute.Media<'images', true>;
+    adminNotes: Schema.Attribute.Text;
     assessment: Schema.Attribute.JSON & Schema.Attribute.Required;
     cityTown: Schema.Attribute.String & Schema.Attribute.Required;
     continent: Schema.Attribute.String & Schema.Attribute.Required;
@@ -629,8 +696,14 @@ export interface ApiLeadershipApplicationLeadershipApplication
     region: Schema.Attribute.String & Schema.Attribute.Required;
     resumeCv: Schema.Attribute.Media<'files' | 'images', true> &
       Schema.Attribute.Required;
+    reviewedAt: Schema.Attribute.DateTime;
     sex: Schema.Attribute.String & Schema.Attribute.Required;
     sexOther: Schema.Attribute.String;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'under_review', 'shortlisted', 'accepted', 'rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pending'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -692,6 +765,42 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiNewsItemNewsItem extends Struct.CollectionTypeSchema {
+  collectionName: 'news_items';
+  info: {
+    description: 'Impact stories, updates, and announcements';
+    displayName: 'News & Stories';
+    pluralName: 'news-items';
+    singularName: 'news-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    author: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Y.O.U Alliance'>;
+    category: Schema.Attribute.String;
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    excerpt: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-item.news-item'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOrganizationApplicationOrganizationApplication
   extends Struct.CollectionTypeSchema {
   collectionName: 'organization_applications';
@@ -706,6 +815,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
   };
   attributes: {
     address: Schema.Attribute.String & Schema.Attribute.Required;
+    adminNotes: Schema.Attribute.Text;
     countriesCovered: Schema.Attribute.String & Schema.Attribute.Required;
     country: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
@@ -714,7 +824,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     email: Schema.Attribute.Email & Schema.Attribute.Required;
     facebookUrl: Schema.Attribute.String;
     focusArea: Schema.Attribute.String & Schema.Attribute.Required;
-    focusSDGs: Schema.Attribute.JSON & Schema.Attribute.Required;
+    focusSdgs: Schema.Attribute.JSON & Schema.Attribute.Required;
     instagramUrl: Schema.Attribute.String;
     linkedinUrl: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -728,7 +838,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     organizationLogo: Schema.Attribute.Media<'images' | 'files', true>;
     organizationName: Schema.Attribute.String & Schema.Attribute.Required;
     projectDescription: Schema.Attribute.Text & Schema.Attribute.Required;
-    projectFocusSDGs: Schema.Attribute.JSON & Schema.Attribute.Required;
+    projectFocusSdgs: Schema.Attribute.JSON & Schema.Attribute.Required;
     projectImages: Schema.Attribute.Media<'images' | 'files', true>;
     projectLedBy: Schema.Attribute.String & Schema.Attribute.Required;
     projectName: Schema.Attribute.String & Schema.Attribute.Required;
@@ -742,7 +852,13 @@ export interface ApiOrganizationApplicationOrganizationApplication
     representativePhone: Schema.Attribute.String & Schema.Attribute.Required;
     representativePhoneCode: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'+84'>;
+    reviewedAt: Schema.Attribute.DateTime;
     socialImpactMetrics: Schema.Attribute.Text & Schema.Attribute.Required;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'under_review', 'shortlisted', 'accepted', 'rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'pending'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -776,6 +892,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'sections.featured-members',
         'sections.team-grid',
         'sections.embed',
+        'sections.feature-grid',
+        'sections.image-text-grid',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -913,6 +1031,7 @@ export interface ApiSupportSubmissionSupportSubmission
     draftAndPublish: false;
   };
   attributes: {
+    adminNotes: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -932,6 +1051,10 @@ export interface ApiSupportSubmissionSupportSubmission
       Schema.Attribute.Private;
     projects: Schema.Attribute.JSON & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<
+      ['received', 'acknowledged', 'processed']
+    > &
+      Schema.Attribute.DefaultTo<'received'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1538,9 +1661,11 @@ declare module '@strapi/strapi' {
       'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::faq.faq': ApiFaqFaq;
       'api::global-setting.global-setting': ApiGlobalSettingGlobalSetting;
+      'api::home-page.home-page': ApiHomePageHomePage;
       'api::inquiry.inquiry': ApiInquiryInquiry;
       'api::leadership-application.leadership-application': ApiLeadershipApplicationLeadershipApplication;
       'api::member.member': ApiMemberMember;
+      'api::news-item.news-item': ApiNewsItemNewsItem;
       'api::organization-application.organization-application': ApiOrganizationApplicationOrganizationApplication;
       'api::page.page': ApiPagePage;
       'api::policy-document.policy-document': ApiPolicyDocumentPolicyDocument;
