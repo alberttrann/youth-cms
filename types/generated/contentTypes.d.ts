@@ -988,6 +988,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     outstandingImage: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    partnerOrganization: Schema.Attribute.String;
     projectStatus: Schema.Attribute.Enumeration<
       ['ongoing', 'completed', 'planned']
     >;

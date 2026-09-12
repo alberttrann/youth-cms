@@ -177,6 +177,7 @@ const PROJECTS = [
     projectStatus: 'ongoing',
     year: 2026,
     memberName: 'CSE Global',
+    partnerOrganization: 'UNESCO, British Council',
   },
 ];
 

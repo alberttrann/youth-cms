@@ -84,6 +84,7 @@ const PROJECTS = [
     projectStatus: 'ongoing',
     year: 2022,
     memberName: 'Youth for Education Foundation',
+    partnerOrganization: 'UNESCO, British Council',
   },
   {
     name: 'Green Belt Movement',
