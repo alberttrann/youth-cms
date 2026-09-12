@@ -20,9 +20,10 @@
         [
           { "name": "country", "size": 4 },
           { "name": "continent", "size": 4 },
-          { "name": "leader", "size": 4 }
+          { "name": "period", "size": 4 }
         ],
-        [{ "name": "period", "size": 6 }],
+        [{ "name": "representative", "size": 12 }],
+        [{ "name": "contactPerson", "size": 12 }],
         [{ "name": "focusSdgs", "size": 12 }],
         [
           { "name": "logo", "size": 4 },
@@ -87,6 +88,20 @@
           "placeholder": "VD: 2019 → nay"
         },
         "list": { "label": "Thời gian" }
+      },
+      "representative": {
+        "edit": {
+          "label": "Representative (Người đại diện)",
+          "description": "Thông tin người đại diện tổ chức: Prefix, Full name, Title"
+        },
+        "list": { "label": "Representative" }
+      },
+      "contactPerson": {
+        "edit": {
+          "label": "Contact Person (Người liên hệ)",
+          "description": "Thông tin liên hệ công khai: Prefix, Name, Title, Email to publish (bắt buộc), Phone number to publish (tách mã quốc gia)"
+        },
+        "list": { "label": "Contact Person" }
       },
       "focusSdgs": {
         "edit": {
@@ -205,6 +220,16 @@
     },
     "leader": {
       "type": "string"
+    },
+    "representative": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.representative"
+    },
+    "contactPerson": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.contact-person"
     },
     "gallery": {
       "type": "media",

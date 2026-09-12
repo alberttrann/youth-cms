@@ -297,6 +297,24 @@ export interface SharedButton extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedContactPerson extends Struct.ComponentSchema {
+  collectionName: 'components_shared_contact_people';
+  info: {
+    description: 'Public contact person details: Prefix, Name, Title, Email to publish, Phone number with country code';
+    displayName: 'Contact Person';
+    icon: 'phone';
+  };
+  attributes: {
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    name: Schema.Attribute.String;
+    phoneCountryCode: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'+84'>;
+    phoneNumber: Schema.Attribute.String;
+    prefix: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_shared_faq_items';
   info: {
@@ -336,6 +354,20 @@ export interface SharedImageTextItem extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SharedRepresentative extends Struct.ComponentSchema {
+  collectionName: 'components_shared_representatives';
+  info: {
+    description: 'Representative details: Prefix, Full name, Title';
+    displayName: 'Representative';
+    icon: 'user';
+  };
+  attributes: {
+    fullName: Schema.Attribute.String;
+    prefix: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -431,9 +463,11 @@ declare module '@strapi/strapi' {
       'sections.stats-grid': SectionsStatsGrid;
       'sections.team-grid': SectionsTeamGrid;
       'shared.button': SharedButton;
+      'shared.contact-person': SharedContactPerson;
       'shared.faq-item': SharedFaqItem;
       'shared.feature-item': SharedFeatureItem;
       'shared.image-text-item': SharedImageTextItem;
+      'shared.representative': SharedRepresentative;
       'shared.section-style': SharedSectionStyle;
       'shared.seo': SharedSeo;
       'shared.social-link': SharedSocialLink;

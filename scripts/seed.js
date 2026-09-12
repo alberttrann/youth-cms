@@ -23,6 +23,19 @@ const MEMBERS = [
     focusSdgs: ['4', '10', '17'],
     period: '2019 → nay',
     leader: 'Dr. Hue Tran',
+    representative: {
+      prefix: 'Dr.',
+      fullName: 'Hue Tran',
+      title: 'President & Founder',
+    },
+    contactPerson: {
+      prefix: 'Ms.',
+      name: 'Emily Thuy Linh',
+      title: 'Executive Secretary',
+      email: 'contact@yef.org',
+      phoneCountryCode: '+84',
+      phoneNumber: '912345678',
+    },
     socialLinks: [
       { platform: 'facebook', url: 'https://facebook.com/yef' },
       { platform: 'instagram', url: 'https://instagram.com/yef' },
@@ -38,6 +51,19 @@ const MEMBERS = [
     focusSdgs: ['13', '15', '7'],
     period: '2020 → nay',
     leader: 'James Kipchoge',
+    representative: {
+      prefix: 'Mr.',
+      fullName: 'James Kipchoge',
+      title: 'Executive Director',
+    },
+    contactPerson: {
+      prefix: 'Ms.',
+      name: 'Amina Wangari',
+      title: 'Communications Coordinator',
+      email: 'contact@greenfuture.org',
+      phoneCountryCode: '+254',
+      phoneNumber: '712345678',
+    },
     socialLinks: [
       { platform: 'twitter', url: 'https://twitter.com/greenfuture' },
       { platform: 'linkedin', url: 'https://linkedin.com/company/greenfuture' },

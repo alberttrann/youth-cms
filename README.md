@@ -119,7 +119,7 @@ youth-cms/
 | `api::about-us.about-us` | **Single Type** | `true` | Quản lý trang Giới thiệu (`contentBlocks` 13 sections), thư ngỏ Chủ tịch, SEO metadata. |
 | `api::global-setting.global-setting` | **Single Type** | `false` | Cấu hình toàn trang: Địa chỉ, Email, Hotline, Giờ làm việc, Ngân hàng, Số tài khoản, Ảnh QR, Link Điều khoản. |
 | `api::project.project` | **Collection** | `true` | Dự án SDG: Tên, mô tả, chỉ số tác động, khu vực, `countriesCovered`, `focusSdgs` (multi-enum), ảnh bìa, thư viện ảnh `gallery`, liên kết `member`. |
-| `api::member.member` | **Collection** | `true` | Tổ chức thành viên: Logo, ảnh bìa, mô tả ngắn, mô tả chi tiết, quốc gia, châu lục, người đại diện, thời gian, `focusSdgs`. |
+| `api::member.member` | **Collection** | `true` | Tổ chức thành viên: Logo, ảnh bìa, mô tả ngắn, mô tả chi tiết, quốc gia, châu lục, Người đại diện (Representative: Prefix, Full name, Title), Người liên hệ (Contact Person: Prefix, Name, Title, Email to publish, Phone number to publish), thời gian, `focusSdgs`. |
 | `api::team-member.team-member` | **Collection** | `true` | Nhân sự cấp cao: `leadershipType` (executive / continental-director), `regionGroup`, `displayOrder`, ảnh chân dung, tiểu sử, năm nhiệm kỳ. |
 | `api::news-item.news-item` | **Collection** | `true` | Bài viết tin tức: Tiêu đề, đoạn trích ngắn, nội dung chi tiết (Blocks AST), ảnh bìa, ngày đăng, chuyên mục, tác giả. |
 | `api::policy-document.policy-document`| **Collection** | `true` | Văn bản chính sách: Tiêu đề, chuyên mục (`governance`, `membership`, `annual-reports`), định dạng (`pdf`, `xls`, `doc`, `ppt`), file media, dung lượng. |
