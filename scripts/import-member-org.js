@@ -8,6 +8,19 @@ const memberData = {
   shortDescription: 'Education Hub Ghana was established to close education gaps in marginalized communities.',
   description: 'We operate within the framework of SDG4 to ensure no child is left behind in attaining quality education. Our focus is on providing quality education and building strong institutions.',
   leader: 'Theodora Yeboah',
+  representative: {
+    prefix: 'Ms.',
+    fullName: 'Theodora Yeboah',
+    title: 'Executive Director',
+  },
+  contactPerson: {
+    prefix: 'Mr.',
+    name: 'Kwame Mensah',
+    title: 'Partnerships Officer',
+    email: 'contact@educationhubghana.org',
+    phoneCountryCode: '+233',
+    phoneNumber: '241234567',
+  },
   period: 'Since 2019',
   focusSdgs: ['9', '16', '17'],
 };

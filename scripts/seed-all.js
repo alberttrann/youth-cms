@@ -125,7 +125,20 @@ const MEMBERS = [
     shortDescription: 'Empowering global youth through social impact initiatives and leadership certification.',
     description: 'CSE Global connects young leaders through learning exchanges and sustainable development projects.',
     period: '2021 → present',
-    leader: 'Thuy Linh Nguyen',
+    leader: 'Ms. Emily Thuy Linh',
+    representative: {
+      prefix: 'Ms.',
+      fullName: 'Emily Thuy Linh',
+      title: 'Founder & CEO',
+    },
+    contactPerson: {
+      prefix: 'Mr.',
+      name: 'Nguyen Van A',
+      title: 'Project Coordinator',
+      email: 'contact@cseglobal.org',
+      phoneCountryCode: '+84',
+      phoneNumber: '901234567',
+    },
     focusSdgs: ['4', '10', '17'],
   },
   {
@@ -136,6 +149,19 @@ const MEMBERS = [
     description: 'Education Hub Ghana operates to ensure quality education access for vulnerable youth.',
     period: '2019 → present',
     leader: 'Theodora Yeboah',
+    representative: {
+      prefix: 'Ms.',
+      fullName: 'Theodora Yeboah',
+      title: 'Executive Director',
+    },
+    contactPerson: {
+      prefix: 'Mr.',
+      name: 'Kwame Mensah',
+      title: 'Partnerships Officer',
+      email: 'contact@educationhubghana.org',
+      phoneCountryCode: '+233',
+      phoneNumber: '241234567',
+    },
     focusSdgs: ['9', '16', '17'],
   },
 ];
@@ -151,6 +177,7 @@ const PROJECTS = [
     projectStatus: 'ongoing',
     year: 2026,
     memberName: 'CSE Global',
+    partnerOrganization: 'UNESCO, British Council',
   },
 ];
 

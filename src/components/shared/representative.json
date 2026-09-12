@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_representatives",
+  "info": {
+    "displayName": "Representative",
+    "icon": "user",
+    "description": "Representative details: Prefix, Full name, Title"
+  },
+  "options": {},
+  "attributes": {
+    "prefix": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

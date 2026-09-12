@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_shared_contact_people",
+  "info": {
+    "displayName": "Contact Person",
+    "icon": "phone",
+    "description": "Public contact person details: Prefix, Name, Title, Email to publish, Phone number with country code"
+  },
+  "options": {},
+  "attributes": {
+    "prefix": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phoneCountryCode": {
+      "type": "string",
+      "default": "+84"
+    },
+    "phoneNumber": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
