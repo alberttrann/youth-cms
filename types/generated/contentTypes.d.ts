@@ -722,6 +722,7 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    contactPerson: Schema.Attribute.Component<'shared.contact-person', false>;
     continent: Schema.Attribute.Enumeration<
       ['Asia', 'Africa', 'America', 'Australia', 'Europe']
     >;
@@ -745,7 +746,6 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    leader: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -757,6 +757,7 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     period: Schema.Attribute.String;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
+    representative: Schema.Attribute.Component<'shared.representative', false>;
     shortDescription: Schema.Attribute.String;
     socialLinks: Schema.Attribute.Component<'shared.social-link', true>;
     updatedAt: Schema.Attribute.DateTime;
