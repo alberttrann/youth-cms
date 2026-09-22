@@ -44,7 +44,8 @@
           { "name": "member", "size": 6 }
         ],
         [
-          { "name": "countriesCovered", "size": 12 }
+          { "name": "countriesCovered", "size": 6 },
+          { "name": "partnerOrganization", "size": 6 }
         ],
         [
           { "name": "focusSdgs", "size": 12 }
@@ -109,6 +110,14 @@
           "mainField": "name"
         },
         "list": { "label": "Thành viên" }
+      },
+      "partnerOrganization": {
+        "edit": {
+          "label": "Tổ chức đối tác (Partner Organization)",
+          "placeholder": "VD: UNESCO, British Council, UNICEF...",
+          "description": "Tên tổ chức đối tác hoặc đồng tổ chức (co-host) không phải là thành viên chính thức của Y.O.U."
+        },
+        "list": { "label": "Tổ chức đối tác" }
       },
       "countriesCovered": {
         "edit": {
@@ -219,6 +228,9 @@
       "relation": "manyToOne",
       "target": "api::member.member",
       "inversedBy": "projects"
+    },
+    "partnerOrganization": {
+      "type": "string"
     }
   }
 }

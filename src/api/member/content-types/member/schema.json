@@ -221,6 +221,16 @@
       "repeatable": false,
       "component": "shared.contact-person"
     },
+    "representative": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.representative"
+    },
+    "contactPerson": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.contact-person"
+    },
     "gallery": {
       "type": "media",
       "multiple": true,
