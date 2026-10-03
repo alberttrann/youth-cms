@@ -3,20 +3,47 @@ services:
     image: ghcr.io/alberttrann/youth-cms:latest
     pull_policy: always
     restart: unless-stopped
-    env_file:
-      - .env
+
     environment:
-      NODE_ENV: production
-      HOST: 0.0.0.0
-      PORT: 1337
+      # Strapi server
+      NODE_ENV: ${NODE_ENV:-production}
+      HOST: ${HOST:-0.0.0.0}
+      PORT: ${PORT:-1337}
+      PUBLIC_URL: ${PUBLIC_URL}
+
+      # Strapi secrets
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+
+      # Database
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_SSL: ${DATABASE_SSL}
+
+      # Cloudinary
+      CLOUDINARY_NAME: ${CLOUDINARY_NAME}
+      CLOUDINARY_KEY: ${CLOUDINARY_KEY}
+      CLOUDINARY_SECRET: ${CLOUDINARY_SECRET}
+
     ports:
       - "${PORT:-1337}:1337"
+
     volumes:
       - strapi-data:/opt/app/.tmp
-      # Cloudinary is the production upload provider; this remains a safe local fallback.
       - strapi-uploads:/opt/app/public/uploads
+
     healthcheck:
-      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:1337/_health', r => process.exit(r.statusCode === 204 ? 0 : 1)).on('error', () => process.exit(1))"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://127.0.0.1:1337/_health', r => process.exit(r.statusCode === 204 ? 0 : 1)).on('error', () => process.exit(1))"
+        ]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -24,4 +51,9 @@ services:
 
 volumes:
   strapi-data:
+    external: true
+    name: youth-cms_strapi-data
+
   strapi-uploads:
+    external: true
+    name: youth-cms_strapi-uploads
