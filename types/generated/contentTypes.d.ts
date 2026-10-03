@@ -849,6 +849,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     projectStatus: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.String & Schema.Attribute.Required;
+    representativeEmail: Schema.Attribute.Email & Schema.Attribute.Required;
     representativeFullName: Schema.Attribute.String & Schema.Attribute.Required;
     representativePhone: Schema.Attribute.String & Schema.Attribute.Required;
     representativePhoneCode: Schema.Attribute.String &
