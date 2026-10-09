@@ -817,6 +817,10 @@ export interface ApiOrganizationApplicationOrganizationApplication
   attributes: {
     address: Schema.Attribute.String & Schema.Attribute.Required;
     adminNotes: Schema.Attribute.Text;
+    contactPersonEmail: Schema.Attribute.Email;
+    contactPersonFullName: Schema.Attribute.String;
+    contactPersonPhone: Schema.Attribute.String;
+    contactPersonPhoneCode: Schema.Attribute.String;
     countriesCovered: Schema.Attribute.String & Schema.Attribute.Required;
     country: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
@@ -827,6 +831,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     focusArea: Schema.Attribute.String & Schema.Attribute.Required;
     focusSdgs: Schema.Attribute.JSON & Schema.Attribute.Required;
     instagramUrl: Schema.Attribute.String;
+    isPrimaryContact: Schema.Attribute.Enumeration<['yes', 'no']>;
     linkedinUrl: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
