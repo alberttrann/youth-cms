@@ -93,6 +93,9 @@ jobs:
           admin_status=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:1337/admin)
           test "$admin_status" = "200"
 
+      - name: Verify organization contact persistence
+        run: node scripts/smoke-organization-contact.cjs
+
   build:
     name: Build and publish image
     needs: validate

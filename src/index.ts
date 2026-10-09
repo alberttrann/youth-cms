@@ -1,6 +1,7 @@
 import type { Core } from '@strapi/strapi';
 import crypto from 'crypto';
 import { synchronizeRbacPermissions } from './utils/rbac';
+import { synchronizeOrganizationContactLayout } from './utils/organization-contact-layout';
 
 const PUBLIC_PERMISSIONS = [
   'api::home-page.home-page.find',
@@ -121,6 +122,7 @@ export default {
   },
 
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    await synchronizeOrganizationContactLayout(strapi);
     await grantPublicPermissions(strapi);
     await synchronizeRbacPermissions(strapi);
     await ensurePortalMasterToken(strapi);

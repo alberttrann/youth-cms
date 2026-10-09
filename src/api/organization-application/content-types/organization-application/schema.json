@@ -30,6 +30,18 @@
           { "name": "representativePhone", "size": 6 }
         ],
         [
+          { "name": "representativeEmail", "size": 6 },
+          { "name": "isPrimaryContact", "size": 6 }
+        ],
+        [
+          { "name": "contactPersonFullName", "size": 6 },
+          { "name": "contactPersonEmail", "size": 6 }
+        ],
+        [
+          { "name": "contactPersonPhoneCode", "size": 6 },
+          { "name": "contactPersonPhone", "size": 6 }
+        ],
+        [
           { "name": "country", "size": 6 },
           { "name": "address", "size": 6 }
         ],
@@ -70,7 +82,16 @@
         "edit": { "label": "Membership Review Status" },
         "list": { "label": "Status", "sortable": true }
       },
-      "adminNotes": { "edit": { "label": "Internal Review Notes" } }
+      "adminNotes": { "edit": { "label": "Internal Review Notes" } },
+      "representativeFullName": { "edit": { "label": "Head of Organization's Full Name" } },
+      "representativeEmail": { "edit": { "label": "Head of Organization's Email" } },
+      "representativePhone": { "edit": { "label": "Head of Organization's Phone Number" } },
+      "representativePhoneCode": { "edit": { "label": "Head of Organization's Phone Country Code" } },
+      "isPrimaryContact": { "edit": { "label": "Head of Organization Is Primary Contact" } },
+      "contactPersonFullName": { "edit": { "label": "Contact Person's Full Name" } },
+      "contactPersonEmail": { "edit": { "label": "Contact Person's Email" } },
+      "contactPersonPhone": { "edit": { "label": "Contact Person's Phone Number" } },
+      "contactPersonPhoneCode": { "edit": { "label": "Contact Person's Phone Country Code" } }
     }
   },
   "attributes": {
@@ -92,6 +113,11 @@
     "representativeEmail": { "type": "email", "required": true },
     "representativePhone": { "type": "string", "required": true },
     "representativePhoneCode": { "type": "string", "default": "+84" },
+    "isPrimaryContact": { "type": "enumeration", "enum": ["yes", "no"] },
+    "contactPersonFullName": { "type": "string" },
+    "contactPersonEmail": { "type": "email" },
+    "contactPersonPhone": { "type": "string" },
+    "contactPersonPhoneCode": { "type": "string" },
     "yearOfEstablishment": { "type": "integer", "required": true },
     "country": { "type": "string", "required": true },
     "address": { "type": "string", "required": true },
