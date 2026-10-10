@@ -83,6 +83,7 @@
       "type": "datetime"
     },
     "fullName": { "type": "string", "required": true },
+    "position": { "type": "string" },
     "sex": { "type": "string", "required": true },
     "sexOther": { "type": "string" },
     "dateOfBirth": { "type": "date", "required": true },
@@ -113,6 +114,9 @@
       "allowedTypes": ["files", "images"]
     },
     "continent": { "type": "string", "required": true },
+    "orgProfileDoc": { "type": "media", "multiple": true, "allowedTypes": ["files", "images"] },
+    "leadershipProofDoc": { "type": "media", "multiple": true, "allowedTypes": ["files", "images"] },
+    "additionalDocs": { "type": "media", "multiple": true, "allowedTypes": ["files", "images"] },
     "region": { "type": "string", "required": true },
     "assessment": { "type": "json", "required": true }
   }

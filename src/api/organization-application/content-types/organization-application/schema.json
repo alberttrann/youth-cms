@@ -138,6 +138,11 @@
       "multiple": true,
       "allowedTypes": ["images", "files"]
     },
+    "organizationActivityPhotos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"]
+    },
     "projectName": { "type": "string", "required": true },
     "projectOrganizationName": { "type": "string", "required": true },
     "projectDescription": { "type": "text", "required": true },
