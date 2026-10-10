@@ -669,6 +669,7 @@ export interface ApiLeadershipApplicationLeadershipApplication
   };
   attributes: {
     activityPhotos: Schema.Attribute.Media<'images', true>;
+    additionalDocs: Schema.Attribute.Media<'files' | 'images', true>;
     adminNotes: Schema.Attribute.Text;
     assessment: Schema.Attribute.JSON & Schema.Attribute.Required;
     cityTown: Schema.Attribute.String & Schema.Attribute.Required;
@@ -682,6 +683,7 @@ export interface ApiLeadershipApplicationLeadershipApplication
     facebookUrl: Schema.Attribute.String;
     fullName: Schema.Attribute.String & Schema.Attribute.Required;
     instagramUrl: Schema.Attribute.String;
+    leadershipProofDoc: Schema.Attribute.Media<'files' | 'images', true>;
     linkedinUrl: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -690,7 +692,9 @@ export interface ApiLeadershipApplicationLeadershipApplication
     > &
       Schema.Attribute.Private;
     nationality: Schema.Attribute.String & Schema.Attribute.Required;
+    orgProfileDoc: Schema.Attribute.Media<'files' | 'images', true>;
     portfolio: Schema.Attribute.String;
+    position: Schema.Attribute.String;
     profilePhoto: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.String & Schema.Attribute.Required;
@@ -840,6 +844,7 @@ export interface ApiOrganizationApplicationOrganizationApplication
     > &
       Schema.Attribute.Private;
     organizationDescription: Schema.Attribute.Text & Schema.Attribute.Required;
+    organizationActivityPhotos: Schema.Attribute.Media<'images', true>;
     organizationImage: Schema.Attribute.Media<'images' | 'files', true>;
     organizationLogo: Schema.Attribute.Media<'images' | 'files', true>;
     organizationName: Schema.Attribute.String & Schema.Attribute.Required;
