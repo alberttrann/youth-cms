@@ -105,6 +105,39 @@ async function main() {
     for (const field of ['resumeCv', 'orgProfileDoc', 'leadershipProofDoc', 'additionalDocs']) {
       assert.deepEqual(saved[field].map(file => file.id), candidate[field]);
     }
+    for (const position of ['Marketing & Communication Member', 'Secretary & Assistant']) {
+      for (const staleFields of [false, true]) {
+        const shortCandidate = { ...candidate, position };
+        if (!staleFields) {
+          for (const field of ['assessment', 'resumeCv', 'orgProfileDoc', 'leadershipProofDoc', 'additionalDocs']) delete shortCandidate[field];
+        }
+        const result = await fetch(`http://127.0.0.1:${port}/api/leadership-applications`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: shortCandidate }),
+        });
+        const json = await result.json();
+        assert.equal(result.status, 201, JSON.stringify(json));
+        const record = await app.documents('api::leadership-application.leadership-application').findOne({
+          documentId: json.data.documentId, populate: ['resumeCv', 'orgProfileDoc', 'leadershipProofDoc', 'additionalDocs'],
+        });
+        assert.equal(record.position, position);
+        assert.equal(record.continent, candidate.continent);
+        assert.equal(record.region, candidate.region);
+        assert.equal(record.assessment ?? null, null);
+        for (const field of ['resumeCv', 'orgProfileDoc', 'leadershipProofDoc', 'additionalDocs']) assert.equal((record[field] ?? []).length, 0);
+      }
+    }
+    for (const missing of ['assessment', 'resumeCv']) {
+      const incomplete = { ...candidate };
+      delete incomplete[missing];
+      const result = await fetch(`http://127.0.0.1:${port}/api/leadership-applications`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: incomplete }),
+      });
+      assert.equal(result.status, 400, await result.text());
+    }
+    // The original Director record must remain intact after short submissions.
+    const original = await app.documents('api::leadership-application.leadership-application').findOne({ documentId: saved.documentId });
+    assert.deepEqual(original.assessment, candidate.assessment);
+    console.log('PASS: Marketing/Secretary short flow, stale fields ignored, Director requirements and historical answers preserved');
     const leadershipConfig = await app.plugin('content-manager').service('content-types')
       .findConfiguration(app.contentTypes['api::leadership-application.leadership-application']);
     assert.equal(leadershipConfig.metadatas.resumeCv.edit.label, 'CV / Portfolio');
