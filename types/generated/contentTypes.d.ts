@@ -671,7 +671,7 @@ export interface ApiLeadershipApplicationLeadershipApplication
     activityPhotos: Schema.Attribute.Media<'images', true>;
     additionalDocs: Schema.Attribute.Media<'files' | 'images', true>;
     adminNotes: Schema.Attribute.Text;
-    assessment: Schema.Attribute.JSON & Schema.Attribute.Required;
+    assessment: Schema.Attribute.JSON;
     cityTown: Schema.Attribute.String & Schema.Attribute.Required;
     continent: Schema.Attribute.String & Schema.Attribute.Required;
     countryOfResidence: Schema.Attribute.String & Schema.Attribute.Required;
@@ -698,8 +698,7 @@ export interface ApiLeadershipApplicationLeadershipApplication
     profilePhoto: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     region: Schema.Attribute.String & Schema.Attribute.Required;
-    resumeCv: Schema.Attribute.Media<'files' | 'images', true> &
-      Schema.Attribute.Required;
+    resumeCv: Schema.Attribute.Media<'files' | 'images', true>;
     reviewedAt: Schema.Attribute.DateTime;
     sex: Schema.Attribute.String & Schema.Attribute.Required;
     sexOther: Schema.Attribute.String;

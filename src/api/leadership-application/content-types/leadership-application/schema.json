@@ -110,7 +110,6 @@
     "resumeCv": {
       "type": "media",
       "multiple": true,
-      "required": true,
       "allowedTypes": ["files", "images"]
     },
     "continent": { "type": "string", "required": true },
@@ -118,6 +117,6 @@
     "leadershipProofDoc": { "type": "media", "multiple": true, "allowedTypes": ["files", "images"] },
     "additionalDocs": { "type": "media", "multiple": true, "allowedTypes": ["files", "images"] },
     "region": { "type": "string", "required": true },
-    "assessment": { "type": "json", "required": true }
+    "assessment": { "type": "json" }
   }
 }

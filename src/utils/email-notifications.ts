@@ -167,6 +167,8 @@ function getLeadershipTemplates(data: Record<string, any>) {
   const continent = escapeHtml(data.continent);
   const region = escapeHtml(data.region);
   const country = escapeHtml(data.countryOfResidence);
+  const role = String(data.position || data.assessment?.appliedPosition || 'Continental Director');
+  const position = escapeHtml(role);
 
   const staffSubject = `[Leadership Application] New Candidate: ${fullName} (${continent} / ${region})`;
   const staffHtml = buildHtmlWrapper(
@@ -177,7 +179,7 @@ function getLeadershipTemplates(data: Record<string, any>) {
     
     <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px; margin: 20px 0;">
       <p style="margin: 0 0 8px 0; font-size: 14px;"><strong>Candidate Name:</strong> ${fullName}</p>
-      <p style="margin: 0 0 8px 0; font-size: 14px;"><strong>Target Role:</strong> Continental Director</p>
+      <p style="margin: 0 0 8px 0; font-size: 14px;"><strong>Target Role:</strong> ${position}</p>
       <p style="margin: 0 0 8px 0; font-size: 14px;"><strong>Continent / Region:</strong> ${continent} — ${region}</p>
       <p style="margin: 0 0 8px 0; font-size: 14px;"><strong>Country of Residence:</strong> ${country}</p>
       <p style="margin: 0 0 8px 0; font-size: 14px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #005D9A; font-weight: 600;">${email}</a></p>
@@ -185,21 +187,21 @@ function getLeadershipTemplates(data: Record<string, any>) {
     </div>
 
     <p style="font-size: 14px; color: #475569;">
-      Inspect their full assessment responses and CV inside the <strong>Y.O.U Management Portal ➔ Candidate ATS</strong>.
+      Inspect their application and any supporting documents inside the <strong>Y.O.U Management Portal ➔ Candidate ATS</strong>.
     </p>
     `
   );
 
-  const userSubject = `Application Received: Continental Director / Leadership Role — Y.O.U`;
+  const userSubject = `Application Received: ${role} — Y.O.U`;
   const userHtml = buildHtmlWrapper(
     'Leadership Application Received',
     `
     <h2 style="font-size: 20px; font-weight: 700; color: #0F172A; margin-top: 0;">Dear ${fullName},</h2>
     <p style="font-size: 14px; line-height: 1.6; color: #475569;">
-      Thank you for submitting your application for the <strong>Continental Director / Leadership Role</strong> at the Youth Organization Union (Y.O.U).
+      Thank you for submitting your application for the <strong>${position}</strong> role at the Youth Organization Union (Y.O.U).
     </p>
     <p style="font-size: 14px; line-height: 1.6; color: #475569;">
-      We have successfully recorded your profile and assessment submissions for the <strong>${continent} (${region})</strong> region.
+      We have successfully recorded your application for the <strong>${continent} (${region})</strong> region.
     </p>
 
     <div style="background-color: #FEF2F2; border-left: 4px solid #EE334E; padding: 16px; border-radius: 0 10px 10px 0; margin: 24px 0;">
