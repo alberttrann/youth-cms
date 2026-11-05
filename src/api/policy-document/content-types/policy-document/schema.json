@@ -19,7 +19,8 @@
       "enum": [
         "governance",
         "membership",
-        "annual-reports"
+        "annual-reports",
+        "legal"
       ]
     },
     "fileType": {
@@ -43,6 +44,19 @@
     },
     "fileSize": {
       "type": "string"
-    }
+    },
+    "slug": { "type": "uid", "targetField": "title" },
+    "section": { "type": "enumeration", "enum": ["charter", "governance-policy", "protocol", "code-of-conduct", "donation-terms", "bluebook", "community-guidelines", "membership-agreement", "careers", "operational-guidelines", "annual-report", "terms-of-service", "privacy-policy"] },
+    "continent": { "type": "enumeration", "enum": ["Africa", "America", "Asia", "Australia", "Europe"] },
+    "revision": { "type": "string", "default": "0.0" },
+    "effectiveDate": { "type": "date" },
+    "displayMode": { "type": "enumeration", "enum": ["archive", "slides", "annual-report", "legal"], "default": "archive" },
+    "externalUrl": { "type": "text" },
+    "embedUrl": { "type": "text" },
+    "content": { "type": "blocks" },
+    "coverImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "slideImages": { "type": "media", "multiple": true, "allowedTypes": ["images"] },
+    "archives": { "type": "component", "repeatable": true, "component": "documents.archive-version" },
+    "displayOrder": { "type": "integer", "default": 0 }
   }
 }

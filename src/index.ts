@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { synchronizeRbacPermissions } from './utils/rbac';
 import { synchronizeOrganizationContactLayout } from './utils/organization-contact-layout';
 import { synchronizeMembershipDetailsLayout } from './utils/membership-details-layout';
+import { initializeDocumentLibrary, registerDocumentLibraryMiddleware, synchronizeDocumentLibraryLayout } from './utils/document-library';
 
 const PUBLIC_PERMISSIONS = [
   'api::home-page.home-page.find',
@@ -112,6 +113,7 @@ async function ensurePortalMasterToken(strapi: Core.Strapi) {
 
 export default {
   register({ strapi }: { strapi: Core.Strapi }) {
+    registerDocumentLibraryMiddleware(strapi);
     strapi.customFields.register({
       name: 'multi-enum',
       type: 'json',
@@ -125,6 +127,8 @@ export default {
   async bootstrap({ strapi }: { strapi: Core.Strapi }) {
     await synchronizeOrganizationContactLayout(strapi);
     await synchronizeMembershipDetailsLayout(strapi);
+    await initializeDocumentLibrary(strapi);
+    await synchronizeDocumentLibraryLayout(strapi);
     await grantPublicPermissions(strapi);
     await synchronizeRbacPermissions(strapi);
     await ensurePortalMasterToken(strapi);

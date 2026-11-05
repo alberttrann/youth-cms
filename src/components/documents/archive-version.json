@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_documents_archive_versions",
+  "info": { "displayName": "Archived version", "description": "A frozen historical public link; create a separate external copy before editing the current document." },
+  "attributes": {
+    "label": { "type": "string" },
+    "revision": { "type": "string", "required": true },
+    "effectiveDate": { "type": "date", "required": true },
+    "url": { "type": "text", "required": true },
+    "embedUrl": { "type": "text" }
+  }
+}
