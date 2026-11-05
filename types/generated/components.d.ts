@@ -1,5 +1,20 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface DocumentsArchiveVersion extends Struct.ComponentSchema {
+  collectionName: 'components_documents_archive_versions';
+  info: {
+    description: 'A frozen historical public link; create a separate external copy before editing the current document.';
+    displayName: 'Archived version';
+  };
+  attributes: {
+    effectiveDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    embedUrl: Schema.Attribute.Text;
+    label: Schema.Attribute.String;
+    revision: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionsCtaBanner extends Struct.ComponentSchema {
   collectionName: 'components_sections_cta_banners';
   info: {
@@ -449,6 +464,7 @@ export interface SharedStatItem extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'documents.archive-version': DocumentsArchiveVersion;
       'sections.cta-banner': SectionsCtaBanner;
       'sections.embed': SectionsEmbed;
       'sections.faq-section': SectionsFaqSection;

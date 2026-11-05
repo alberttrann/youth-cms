@@ -842,8 +842,8 @@ export interface ApiOrganizationApplicationOrganizationApplication
       'api::organization-application.organization-application'
     > &
       Schema.Attribute.Private;
-    organizationDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     organizationActivityPhotos: Schema.Attribute.Media<'images', true>;
+    organizationDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     organizationImage: Schema.Attribute.Media<'images' | 'files', true>;
     organizationLogo: Schema.Attribute.Media<'images' | 'files', true>;
     organizationName: Schema.Attribute.String & Schema.Attribute.Required;
@@ -935,12 +935,26 @@ export interface ApiPolicyDocumentPolicyDocument
     draftAndPublish: true;
   };
   attributes: {
+    archives: Schema.Attribute.Component<'documents.archive-version', true>;
     category: Schema.Attribute.Enumeration<
-      ['governance', 'membership', 'annual-reports']
+      ['governance', 'membership', 'annual-reports', 'legal']
     >;
+    content: Schema.Attribute.Blocks;
+    continent: Schema.Attribute.Enumeration<
+      ['Africa', 'America', 'Asia', 'Australia', 'Europe']
+    >;
+    coverImage: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    displayMode: Schema.Attribute.Enumeration<
+      ['archive', 'slides', 'annual-report', 'legal']
+    > &
+      Schema.Attribute.DefaultTo<'archive'>;
+    displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    effectiveDate: Schema.Attribute.Date;
+    embedUrl: Schema.Attribute.Text;
+    externalUrl: Schema.Attribute.Text;
     file: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     fileSize: Schema.Attribute.String;
     fileType: Schema.Attribute.Enumeration<['pdf', 'xls', 'doc', 'ppt']>;
@@ -951,6 +965,26 @@ export interface ApiPolicyDocumentPolicyDocument
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    revision: Schema.Attribute.String & Schema.Attribute.DefaultTo<'0.0'>;
+    section: Schema.Attribute.Enumeration<
+      [
+        'charter',
+        'governance-policy',
+        'protocol',
+        'code-of-conduct',
+        'donation-terms',
+        'bluebook',
+        'community-guidelines',
+        'membership-agreement',
+        'careers',
+        'operational-guidelines',
+        'annual-report',
+        'terms-of-service',
+        'privacy-policy',
+      ]
+    >;
+    slideImages: Schema.Attribute.Media<'images', true>;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
