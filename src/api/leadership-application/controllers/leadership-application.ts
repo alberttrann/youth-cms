@@ -9,8 +9,8 @@ export default factories.createCoreController('api::leadership-application.leade
     const shortApplication = data.position === 'Marketing & Communication Member'
       || data.position === 'Secretary & Assistant';
     if (shortApplication) {
-      // Ignore stale full-flow answers/uploads from cached or switched forms.
-      for (const field of ['assessment', 'resumeCv', 'orgProfileDoc', 'leadershipProofDoc', 'additionalDocs', 'portfolio']) {
+      // Keep the optional CV; ignore stale Assessment-only answers/uploads.
+      for (const field of ['assessment', 'orgProfileDoc', 'leadershipProofDoc', 'additionalDocs', 'portfolio']) {
         delete data[field];
       }
     } else {
