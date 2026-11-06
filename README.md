@@ -531,8 +531,6 @@ Khởi chạy nhanh qua `docker-compose.yml`:
 docker compose up -d --build
 ```
 
----
-
 ## 10. Troubleshooting Playbook
 
 | Hiện tượng / Mã lỗi | Nguyên nhân gốc rễ kỹ thuật | Giải pháp khắc phục triệt để |
